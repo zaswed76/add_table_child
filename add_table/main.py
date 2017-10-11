@@ -28,7 +28,7 @@ from add_table.tasks import add_table
 class Main:
     def __init__(self):
         self._init_gui()
-        self.task_manager = task_manager.Task()
+        self.task_manager = task_manager.TaskManager()
         self.task_manager.add_task(add_table.AddTable("add_table"))
 
 
