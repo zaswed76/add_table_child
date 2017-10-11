@@ -92,6 +92,6 @@ ENV/
 
 .gitignore
 .idea/
-MANIFEST.in
-README.rst
-setup.py
+#MANIFEST.in
+#README.rst
+#setup.py
