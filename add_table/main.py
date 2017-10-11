@@ -4,6 +4,8 @@ from PyQt5 import QtCore
 
 from add_table import pth
 from add_table.gui import main_widget
+from add_table import task_manager
+from add_table.tasks import add_table
 
 # def qt_message_handler(mode, context, message):
 #     if mode == QtCore.QtInfoMsg:
@@ -26,6 +28,8 @@ from add_table.gui import main_widget
 class Main:
     def __init__(self):
         self._init_gui()
+        self.task_manager = task_manager.Task()
+        self.task_manager.add_task(add_table.AddTable("add_table"))
 
 
     def _init_gui(self):
