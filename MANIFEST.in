@@ -1,2 +1,4 @@
 
-recursive-include pyomo/resource/dictionaries/work *.txt
+recursive-include add_table/etc *.json
+recursive-include add_table/gui/ui *.ui
+recursive-include add_table/css *.css
