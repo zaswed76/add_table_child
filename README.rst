@@ -1,37 +1,19 @@
-pyomo
+add_table_child
 =====================
 
 
-скрипт для поиска слов похожих по звучанию
+обучение детей таблице сложения
 -------------------------------------------
 
 **Установка**::
 
-  pip install --upgrade git+https://github.com/zaswed76/pyomo.git
+  pip install --upgrade git+https://github.com/zaswed76/add_table_child.git
 
 **или (что бы установить в каталог пользователя)**::
 
-  pip install --upgrade --user git+https://github.com/zaswed76/pyomo.git
+  pip install --upgrade --user git+https://github.com/zaswed76/add_table_child.git
 
 
 .. note:: можно использовать pip3
 
 
-Описание конфига:
-------------------
-
-* добавлена (заменена возможность выбора колличества слов) на возможность выбора
-колличества колонок - ключ::
-
-  -l;
-в **config.py** опция::
-
-  self.limit_columns
-
---------------------------------------------------------------
-
-* добавлена возможность выбора внешнего вида таблицы
-
-в **config.py** опция::
-
-  self.tablefmt
