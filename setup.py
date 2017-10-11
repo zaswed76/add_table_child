@@ -15,7 +15,7 @@ setup(
                 join(dirname(__file__), 'README.rst')).read(),
         install_requires=["PyQt5"],
         entry_points={
-            'gui_scripts':
+            'console_scripts':
                 ['add_table = add_table.main:Main']
         }
 
