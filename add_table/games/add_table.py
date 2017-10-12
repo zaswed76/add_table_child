@@ -1,4 +1,5 @@
 import operator
+import random
 
 
 class Operator():
@@ -46,25 +47,44 @@ class AddTableGame:
     def __init__(self, name):
         self.name = name
         self.tasks = []
+        self.cursor = -1
 
 
     def __str__(self):
         return "class: {} - {}".format(self.__class__.__name__,
                                        self.name)
 
+    @property
     def next_step(self):
-        return
+        if self.cursor < len(self.tasks) - 1:
+            self.cursor +=1
+            return self.tasks[self.cursor]
+        else:
+            return None
+
 
     def create_tasks(self, level: int, operator_line: str):
         for t in range(1, 10):
             self.tasks.append(Task(level, t, operator_line))
+
+    def tasks_mix(self):
+        random.shuffle(self.tasks)
+
+
 
 
 if __name__ == '__main__':
     pass
     game = AddTableGame("add_table")
     game.create_tasks(2, Operator.Add)
-    print(game.tasks)
-    # # print(operator.add.__format__())
+    # print(game.tasks)
+    # game.tasks_mix()
+    for i in range(15):
+        task = game.next_step
+        if isinstance(task, Task):
+            print(task.text)
+
+
+            # # print(operator.add.__format__())
     # op = Operator(1, 2)
     # print(op)

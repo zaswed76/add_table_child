@@ -47,7 +47,7 @@ class Main:
     def start_game(self):
 
         self.current_game = self.game_manager[self.cfg.current_game]
-        task = self.current_game.next_step()
+        task = self.current_game.next_step
 
     def next_step(self):
         pass
