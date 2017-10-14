@@ -1,4 +1,33 @@
 
 QFrame#main_widget {
-    background-color: aqua;
+    background-color: #d1d1d1;
 }
+
+Btn#start_btn {
+    image: url(./resource/icons/start_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
+Btn#start_btn:hover {
+    image: url(./resource/icons/start_btn_hover.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
+QLineEdit#result {
+    font: 60pt "Source Sans Pro";
+    background-color: rgb(249, 236, 200);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+

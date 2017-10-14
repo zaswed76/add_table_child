@@ -48,19 +48,21 @@ background-color: rgb(249, 236, 200);</string>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="result">
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
+    <widget class="QLineEdit" name="result">
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
      </property>
-     <property name="styleSheet">
-      <string notr="true">font: 60pt &quot;Source Sans Pro&quot;;
-background-color: rgb(249, 236, 200);</string>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
      </property>
-     <property name="text">
-      <string/>
+     <property name="cursorPosition">
+      <number>0</number>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::LogicalMoveStyle</enum>
      </property>
     </widget>
    </item>

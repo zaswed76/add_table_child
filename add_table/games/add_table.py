@@ -38,6 +38,10 @@ class Task:
                                        self.operator.sign(),
                                        self.term)
 
+    @property
+    def answer(self):
+        return self.operator.method(self.level, self.term)
+
     def __repr__(self):
         return "{}: ({} {} {})".format(self.__class__.__name__, self.level,
                                 self.operator.sign(), self.term)
@@ -48,7 +52,20 @@ class AddTableGame:
         self.name = name
         self.tasks = []
         self.cursor = -1
+        self._current_task = None
 
+
+    @property
+    def current_task(self):
+        return self._current_task
+
+    @current_task.setter
+    def current_task(self, task):
+        self._current_task = task
+
+    def check_answer(self, answer):
+        if int(answer) == self.current_task.answer:
+            return True
 
     def __str__(self):
         return "class: {} - {}".format(self.__class__.__name__,
@@ -58,7 +75,8 @@ class AddTableGame:
     def next_step(self):
         if self.cursor < len(self.tasks) - 1:
             self.cursor +=1
-            return self.tasks[self.cursor]
+            self.current_task = self.tasks[self.cursor]
+            return self.current_task
         else:
             return None
 
@@ -69,6 +87,9 @@ class AddTableGame:
 
     def tasks_mix(self):
         random.shuffle(self.tasks)
+
+    def current_answer(self):
+        return
 
 
 

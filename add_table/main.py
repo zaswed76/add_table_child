@@ -27,30 +27,77 @@ def qt_message_handler(mode, context, message):
 QtCore.qInstallMessageHandler(qt_message_handler)
 
 class Main:
+    num_keys = {
+        QtCore.Qt.Key_0: "0", QtCore.Qt.Key_1: "1", QtCore.Qt.Key_2: "2",
+        QtCore.Qt.Key_3: "3", QtCore.Qt.Key_4: "4", QtCore.Qt.Key_5: "5",
+        QtCore.Qt.Key_6: "6", QtCore.Qt.Key_7: "7", QtCore.Qt.Key_8: "8",
+        QtCore.Qt.Key_9: "9"
+    }
     def __init__(self):
+        self.text = []
 
         self.game_manager = game_manager.GameManager()
         self.game_manager.add_game(add_table.AddTableGame("add_table"))
         self.cfg = config.Config(pth.CONFIG)
         self.game_stat = game_stat.GameStat(self.cfg)
-        self.start_game()
+
         self._init_gui()
 
     def _init_gui(self):
         app = QtWidgets.QApplication(sys.argv)
         app.setStyleSheet(open(pth.CSS_STYLE, "r").read())
         self.gui = main_widget.Widget()
+        self.gui.keyPressEvent = self.keyPressEvent
         self.gui.show()
         self.gui.resize(500, 350)
+        self.gui.start_btn.clicked.connect(self.start_game)
+        self.gui.start_btn.setFocus()
+
         sys.exit(app.exec_())
 
     def start_game(self):
-
         self.current_game = self.game_manager[self.cfg.current_game]
+        self.current_game.create_tasks(2, "add")
         task = self.current_game.next_step
+        self.gui.tasklb.set_task(task.text)
+
+
+    def keyPressEvent(self, QKeyEvent):
+        if QKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.accept_answer()
+        elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
+            self.text.clear()
+            self.gui.tasklb.result.clear()
+        elif self.gui.tasklb.task.text():
+            sign = self.num_keys.get(QKeyEvent.key())
+            if sign in self.num_keys.values():
+                self.text.append(sign)
+                self.gui.tasklb.result.setText("".join(self.text))
+
+
+    def accept_answer(self):
+        answer = self.gui.tasklb.result.text()
+        result = self.current_game.check_answer(answer)
+        if result:
+            self.gui.tasklb.result.clear()
+            self.gui.tasklb.result.clear()
+            self.next_step()
+        else:
+            self.text.clear()
+            self.gui.tasklb.result.clear()
+
+
 
     def next_step(self):
-        pass
+        self.text.clear()
+        task = self.current_game.next_step
+        if task is not None:
+            self.gui.tasklb.set_task(task.text)
+        else:
+            self.gui.tasklb.set_finish()
+
+
+
 
 
 if __name__ == '__main__':
