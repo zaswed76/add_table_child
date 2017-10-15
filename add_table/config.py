@@ -6,7 +6,7 @@ class Config:
         self.data = {}
         self._load()
 
-        self.current_game = self.data["current_game"]
+
 
     def _load(self):
         with open(self.cfg_file, "r") as f:
@@ -16,3 +16,14 @@ class Config:
         with open(self.cfg_file, 'w') as outfile:
             json.dump(self.data, outfile, indent=4)
 
+    @property
+    def current_game(self):
+        return self.data["current_game"]
+
+    @property
+    def timer(self):
+        return self.data["timer"]
+
+    @property
+    def mix(self):
+        return self.data["mix"]

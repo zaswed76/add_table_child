@@ -1,3 +1,5 @@
 {
-"current_game": "add_table"
+  "current_game": "add_table",
+  "timer": 4,
+  "mix": true
 }

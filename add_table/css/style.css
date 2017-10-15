@@ -21,6 +21,15 @@ Btn#start_btn:hover {
 
 }
 
+Btn#cfg_btn {
+    image: url(./resource/icons/cfg.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
 QLineEdit#result {
     font: 60pt "Source Sans Pro";
     background-color: rgb(249, 236, 200);
@@ -31,3 +40,6 @@ QLineEdit#result {
 
 }
 
+GameLabel {
+    background-color: #d1d1d1;
+}

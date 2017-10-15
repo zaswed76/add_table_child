@@ -1,6 +1,9 @@
 import sys
+
+import time
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
+from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot, QTimer
 
 from add_table import pth
 from add_table.gui import main_widget
@@ -25,6 +28,16 @@ def qt_message_handler(mode, context, message):
 
 
 QtCore.qInstallMessageHandler(qt_message_handler)
+
+class Process(QObject):
+    finished = pyqtSignal()
+    process = pyqtSignal()
+    def __init__(self):
+        super().__init__()
+        self.running = False
+
+    def start_timer(self):
+        pass
 
 class Main:
     num_keys = {
@@ -56,11 +69,17 @@ class Main:
         sys.exit(app.exec_())
 
     def start_game(self):
+        range_timer = self.cfg.data["timer"]
         self.current_game = self.game_manager[self.cfg.current_game]
-        self.current_game.create_tasks(2, "add")
-        task = self.current_game.next_step
-        self.gui.tasklb.set_task(task.text)
+        self.current_game.create_tasks(2, "add", mix=self.cfg.mix)
+        self.next_step()
+        if range_timer:
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.tick)
+            self.timer.start(range_timer * 1000)
 
+    def tick(self):
+        self.next_step()
 
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == QtCore.Qt.Key_Return:
@@ -76,6 +95,7 @@ class Main:
 
 
     def accept_answer(self):
+        self.timer.stop()
         answer = self.gui.tasklb.result.text()
         result = self.current_game.check_answer(answer)
         if result:
@@ -85,6 +105,7 @@ class Main:
         else:
             self.text.clear()
             self.gui.tasklb.result.clear()
+        self.timer.start()
 
 
 

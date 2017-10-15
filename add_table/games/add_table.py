@@ -81,9 +81,12 @@ class AddTableGame:
             return None
 
 
-    def create_tasks(self, level: int, operator_line: str):
+    def create_tasks(self, level: int, operator_line: str, mix=False):
         for t in range(1, 10):
             self.tasks.append(Task(level, t, operator_line))
+        if mix:
+            self.tasks_mix()
+
 
     def tasks_mix(self):
         random.shuffle(self.tasks)

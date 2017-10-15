@@ -39,7 +39,7 @@ class GameLabel(QtWidgets.QFrame):
         box = QtWidgets.QHBoxLayout(self)
         box.setContentsMargins(0, 0, 0, 0)
         self.setFixedHeight(100)
-        self.setStyleSheet("background-color: green")
+
 
 
 class Widget(QtWidgets.QFrame):
@@ -56,6 +56,9 @@ class Widget(QtWidgets.QFrame):
         box.addWidget(self.gamelb)
 
         self.start_btn = Btn("start_btn", self)
+        self.start_btn.move(0, 5)
+        self.cfg_btn = Btn("cfg_btn", self)
+        self.cfg_btn.move(550, 5)
 
 
 
