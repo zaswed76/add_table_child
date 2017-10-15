@@ -73,6 +73,7 @@ class Main:
         self.current_game = self.game_manager[self.cfg.current_game]
         self.current_game.create_tasks(2, "add", mix=self.cfg.mix)
         self.next_step()
+        self.start_progress()
         if range_timer:
             self.timer = QTimer()
             self.timer.timeout.connect(self.tick)
@@ -121,8 +122,13 @@ class Main:
         else:
             self.gui.tasklb.set_finish()
 
+    def start_progress(self):
+        self.progress_timer = QTimer()
+        self.progress_timer.timeout.connect(self.progress_tick)
+        self.progress_timer.start(3000)
 
-
+    def progress_tick(self):
+        self.gui.progress.increase()
 
 
 if __name__ == '__main__':

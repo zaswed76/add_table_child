@@ -33,12 +33,31 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.task.setText("{}".format(task))
 
 
-class GameLabel(QtWidgets.QFrame):
+class GameProgress(QtWidgets.QFrame):
     def __init__(self):
         super().__init__()
-        box = QtWidgets.QHBoxLayout(self)
-        box.setContentsMargins(0, 0, 0, 0)
+        self.box = QtWidgets.QHBoxLayout(self)
+        self.box.setContentsMargins(0, 0, 0, 0)
         self.setFixedHeight(100)
+
+
+    def add_progress(self, progress):
+
+        self.box.addWidget(progress)
+
+class Progress(QtWidgets.QProgressBar):
+    def __init__(self):
+        super().__init__()
+        self._value = 0
+        self.setMaximum(10)
+        self.setValue(0)
+        self.setTextVisible(False)
+
+
+
+    def increase(self):
+
+        self.setValue(self.value() + 1)
 
 
 
@@ -52,14 +71,17 @@ class Widget(QtWidgets.QFrame):
         box = QtWidgets.QVBoxLayout(self)
         self.tasklb = TaskLabel()
         box.addWidget(self.tasklb)
-        self.gamelb = GameLabel()
-        box.addWidget(self.gamelb)
+        self.game_progress = GameProgress()
+        box.addWidget(self.game_progress)
 
         self.start_btn = Btn("start_btn", self)
         self.start_btn.move(0, 5)
         self.cfg_btn = Btn("cfg_btn", self)
         self.cfg_btn.move(550, 5)
 
+
+        self.progress = Progress()
+        self.game_progress.add_progress(self.progress)
 
 
 

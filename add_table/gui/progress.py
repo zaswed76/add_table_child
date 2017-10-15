@@ -29,12 +29,12 @@ QtCore.qInstallMessageHandler(qt_message_handler)
 
 
 
-class MyThread(QtCore.QThread, QtCore.QObject):
+class MyThread(QtCore.QThread):
     signal = QtCore.pyqtSignal(int)
     def __init__(self, parent=None):
         QtCore.QThread.__init__(self, parent)
         self.running = True
-        self.value = 10
+        self._value = 10
 
     def run(self):
         self.running = True
@@ -44,40 +44,25 @@ class MyThread(QtCore.QThread, QtCore.QObject):
             self.value -= 1
 
 
-    def set_start_value(self, v):
-        self.value = v
+    @property
+    def value(self):
+        return self._value
 
+    @value.setter
+    def value(self, v):
+        self._value = v
 
-class ControlWindow(QtGui.QWidget):
+class Progress(QtGui.QProgressBar):
     def __init__(self):
-        QtGui.QWidget.__init__(self)
-        self.hbox = QtGui.QHBoxLayout(self)
-        self.start_but = QtGui.QPushButton("start")
-        self.start_but.clicked.connect(self.start)
-
-        self.stop_but = QtGui.QPushButton("stop")
-        self.stop_but.clicked.connect(self.stop)
-
-        self.lab = QtGui.QProgressBar()
-        self.lab.setFixedWidth(500)
-        self.lab.setRange(0, 10)
-        self.lab.setStyleSheet("background-color: lightgrey;")
-
-        self.hbox.addWidget(self.start_but)
-        self.hbox.addWidget(self.stop_but)
-        self.hbox.addWidget(self.lab)
-        self.setLayout(self.hbox)
-        #-------------------------------------------------------------
-
+        super().__init__()
         self.thread = MyThread()
-        self.thread.signal.connect(self.on_change)
+        self.thread.signal.connect(self.setValue)
 
         #-------------------------------------------------------------
 
     def start(self):
-        self.thread.running = False
+        self.thread.value = 100
         self.thread.running = True
-        self.thread.set_start_value(10)
         self.thread.start()
 
     def stop(self):
@@ -93,7 +78,9 @@ class ControlWindow(QtGui.QWidget):
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     # app.setStyleSheet(open('settings/style.qss', "r").read())
-    main = ControlWindow()
+    main = Progress()
+    main.setMaximum(100)
+    main.start()
     main.show()
     sys.exit(app.exec_())
 
