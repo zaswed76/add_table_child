@@ -95,7 +95,10 @@ class Main:
 
 
     def accept_answer(self):
-        self.timer.stop()
+        try:
+            self.timer.stop()
+        except AttributeError:
+            pass
         answer = self.gui.tasklb.result.text()
         result = self.current_game.check_answer(answer)
         if result:
@@ -105,9 +108,10 @@ class Main:
         else:
             self.text.clear()
             self.gui.tasklb.result.clear()
-        self.timer.start()
-
-
+        try:
+            self.timer.start()
+        except AttributeError:
+            pass
 
     def next_step(self):
         self.text.clear()
