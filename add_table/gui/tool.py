@@ -11,6 +11,7 @@ class Levels_Controls(QtWidgets.QFrame):
         self.box.setSpacing(0)
 
 class Tool(QtWidgets.QFrame):
+
     Top = 0
     Bottom = -1
     def __init__(self, app_cfg):
