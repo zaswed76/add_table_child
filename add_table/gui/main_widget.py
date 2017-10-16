@@ -64,10 +64,11 @@ class Progress(QtWidgets.QProgressBar):
 class Widget(QtWidgets.QFrame):
 
 
-    def __init__(self):
+    def __init__(self, app_cfg):
         super().__init__()
+        self.app_cfg = app_cfg
+        width, height = self.app_cfg.size_window
         self.setObjectName("main_widget")
-        self.resize(500, 500)
         box = QtWidgets.QVBoxLayout(self)
         self.tasklb = TaskLabel()
         box.addWidget(self.tasklb)
@@ -75,9 +76,12 @@ class Widget(QtWidgets.QFrame):
         box.addWidget(self.game_progress)
 
         self.start_btn = Btn("start_btn", self)
-        self.start_btn.move(0, 5)
+        self.start_btn.setFixedSize(*self.app_cfg.btn_size)
+        self.start_btn.move(20, 5)
         self.cfg_btn = Btn("cfg_btn", self)
-        self.cfg_btn.move(550, 5)
+        self.cfg_btn.setFixedSize(*self.app_cfg.btn_size)
+
+        self.cfg_btn.move(width-self.app_cfg.btn_size[0]/2, 5)
 
 
         self.progress = Progress()

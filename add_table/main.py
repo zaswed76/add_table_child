@@ -6,8 +6,8 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot, QTimer
 
 from add_table import pth
-from add_table.gui import main_widget
-from add_table import game_manager, game_stat, config
+from add_table.gui import main_widget, config_widget
+from add_table import game_manager, game_stat, config, app
 from add_table.games import add_table
 
 
@@ -52,6 +52,7 @@ class Main:
         self.game_manager = game_manager.GameManager()
         self.game_manager.add_game(add_table.AddTableGame("add_table"))
         self.cfg = config.Config(pth.CONFIG)
+        self.app_cfg = app.Config(pth.APPEARANCE)
         self.game_stat = game_stat.GameStat(self.cfg)
 
         self._init_gui()
@@ -59,17 +60,18 @@ class Main:
     def _init_gui(self):
         app = QtWidgets.QApplication(sys.argv)
         app.setStyleSheet(open(pth.CSS_STYLE, "r").read())
-        self.gui = main_widget.Widget()
+        self.gui = main_widget.Widget(self.app_cfg)
         self.gui.keyPressEvent = self.keyPressEvent
         self.gui.show()
-        self.gui.resize(500, 350)
+        self.gui.resize(*self.app_cfg.size_window)
         self.gui.start_btn.clicked.connect(self.start_game)
+        self.gui.cfg_btn.clicked.connect(self.open_config_wiget)
         self.gui.start_btn.setFocus()
 
         sys.exit(app.exec_())
 
     def start_game(self):
-        range_timer = self.cfg.data["timer"]
+        range_timer = self.cfg.timer
         self.current_game = self.game_manager[self.cfg.current_game]
         self.current_game.create_tasks(2, "add", mix=self.cfg.mix)
         self.next_step()
@@ -78,6 +80,10 @@ class Main:
             self.timer = QTimer()
             self.timer.timeout.connect(self.tick)
             self.timer.start(range_timer * 1000)
+
+    def open_config_wiget(self):
+        self.config_widget = config_widget.ConfigWidget(self.cfg)
+        self.config_widget.show()
 
     def tick(self):
         self.next_step()

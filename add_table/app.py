@@ -1,5 +1,5 @@
-
 from add_table.lib import config_lib
+
 
 class Config(config_lib.Config):
     def __init__(self, cfg_file):
@@ -7,15 +7,10 @@ class Config(config_lib.Config):
         self.data = {}
         self._load()
 
+    @property
+    def size_window(self):
+        return self.data["size_window"]
 
     @property
-    def current_game(self):
-        return self.data["current_game"]
-
-    @property
-    def timer(self):
-        return self.data["timer"]
-
-    @property
-    def mix(self):
-        return self.data["mix"]
+    def btn_size(self):
+        return self.data["btn_size"]
