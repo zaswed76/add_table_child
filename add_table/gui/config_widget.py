@@ -4,8 +4,9 @@ import sys
 from PyQt5 import QtWidgets
 
 class ConfigWidget(QtWidgets.QDialog):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
 
 
 if __name__ == '__main__':

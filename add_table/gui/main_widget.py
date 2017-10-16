@@ -8,8 +8,8 @@ from add_table.gui import tool
 
 
 class Btn(QtWidgets.QPushButton):
-    def __init__(self, name, *__args):
-        super().__init__(*__args)
+    def __init__(self, name, parent):
+        super().__init__()
         self.setObjectName(name)
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
@@ -62,33 +62,31 @@ class Progress(QtWidgets.QProgressBar):
 
 
 
+
 class Widget(QtWidgets.QFrame):
 
 
     def __init__(self, app_cfg):
         super().__init__()
         self.app_cfg = app_cfg
-        width, height = self.app_cfg.size_window
+
         self.setObjectName("main_widget")
-        box = QtWidgets.QVBoxLayout(self)
+        self.box = QtWidgets.QVBoxLayout(self)
+        self.box.setContentsMargins(0, 0, 0, 0)
+
         self.tasklb = TaskLabel()
-        box.addWidget(self.tasklb)
+        self.box.addWidget(self.tasklb)
         self.game_progress = GameProgress()
-        box.addWidget(self.game_progress)
+        self.box.addWidget(self.game_progress)
 
-        self.start_btn = Btn("start_btn", self)
-        self.start_btn.setFixedSize(*self.app_cfg.btn_size)
-        self.start_btn.move(20, 5)
-        self.cfg_btn = Btn("cfg_btn", self)
-        self.cfg_btn.setFixedSize(*self.app_cfg.btn_size)
 
-        self.cfg_btn.move(width-self.app_cfg.btn_size[0]/2, 5)
 
 
         self.progress = Progress()
         self.game_progress.add_progress(self.progress)
 
-
+    def set_tool(self, tool, direct):
+        self.box.insertWidget(direct, tool)
 
 
 

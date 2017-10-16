@@ -6,7 +6,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot, QTimer
 
 from add_table import pth
-from add_table.gui import main_widget, config_widget
+from add_table.gui import main_widget, config_widget, tool
 from add_table import game_manager, game_stat, config, app
 from add_table.games import add_table
 
@@ -64,11 +64,40 @@ class Main:
         self.gui.keyPressEvent = self.keyPressEvent
         self.gui.show()
         self.gui.resize(*self.app_cfg.size_window)
-        self.gui.start_btn.clicked.connect(self.start_game)
-        self.gui.cfg_btn.clicked.connect(self.open_config_wiget)
-        self.gui.start_btn.setFocus()
+
+
+        self._init_tool()
+
+
 
         sys.exit(app.exec_())
+
+    def _init_tool(self):
+        width, height = self.app_cfg.size_window
+        self.tool = tool.Tool(self.app_cfg)
+        self.gui.set_tool(self.tool, direct=tool.Tool.Top)
+
+        # region start button
+        self.start_btn = main_widget.Btn("start_btn", self)
+        # self.start_btn.setFixedSize(*self.app_cfg.btn_size)
+        self.tool.add_widget(self.start_btn)
+        # endregion
+
+        self.level_ctrl = tool.Levels_Controls()
+        self.tool.add_stretch(50)
+        self.tool.add_widget(self.level_ctrl)
+        self.tool.add_stretch(50)
+
+        # region config button
+        self.cfg_btn = main_widget.Btn("cfg_btn", self)
+        # self.cfg_btn.setFixedSize(*self.app_cfg.btn_size)
+        self.tool.add_widget(self.cfg_btn)
+        # endregion
+
+
+        # self.gui.start_btn.clicked.connect(self.start_game)
+        # self.gui.cfg_btn.clicked.connect(self.open_config_wiget)
+        # self.gui.start_btn.setFocus()
 
     def start_game(self):
         range_timer = self.cfg.timer

@@ -9,6 +9,9 @@ Btn#start_btn {
     border-right: none;
     border-bottom: none;
     border-left: none;
+    min-height: 30px;
+    min-width: 30px;
+    margin-left: 20px;
 
 }
 
@@ -27,7 +30,9 @@ Btn#cfg_btn {
     border-right: none;
     border-bottom: none;
     border-left: none;
-
+    min-height: 30px;
+    min-width: 30px;
+    margin-right: 20px;
 }
 
 QLineEdit#result {
@@ -42,4 +47,13 @@ QLineEdit#result {
 
 GameLabel {
     background-color: #d1d1d1;
+}
+
+Tool {
+    background-color: #7dc2d1;
+    max-height: 45px;
+}
+
+Levels_Controls {
+    background-color: #3d45d1;
 }
