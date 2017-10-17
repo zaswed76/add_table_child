@@ -2,9 +2,6 @@ import collections
 
 
 
-
-
-
 class GameManager(collections.MutableMapping):
     def __init__(self, *args, **kwargs):
         self.games = {}

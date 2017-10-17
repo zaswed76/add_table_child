@@ -2,7 +2,7 @@
   "current_game": "add_table",
   "timer": 0,
   "progress_timer_checked": false,
-  "progress_timer": 2,
+  "progress_timer": 4,
   "mix": true,
   "levels": {
     "2": true,

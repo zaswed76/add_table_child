@@ -44,7 +44,10 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.result.setFixedSize(100, 100)
 
     def set_finish(self):
-        self.form.task.setText("{}".format("Finish"))
+        self.form.task.setText("{}".format("ВЫИГРАЛ"))
+
+    def set_lose(self):
+        self.form.task.setText("{}".format("ПРОИГРАЛ"))
 
     def set_task(self, task: str):
         self.form.task.setText("{}".format(task))

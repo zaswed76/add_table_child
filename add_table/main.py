@@ -58,7 +58,7 @@ class Main(QtCore.QObject):
         self.game_manager.add_game(self.add_table_game)
 
 
-
+        self.game_process = False
         self._init_gui()
 
     def _init_gui(self):
@@ -124,6 +124,8 @@ class Main(QtCore.QObject):
         self.start_game()
 
     def start_game(self):
+        self.game_process = True
+        self.gui.tasklb.result.setDisabled(False)
         range_timer = self.cfg.timer
         self.current_game = self.game_manager[self.cfg.current_game]
         self.current_game.create_tasks(int(self.game_stat.current_level), "add", mix=self.cfg.mix)
@@ -185,15 +187,22 @@ class Main(QtCore.QObject):
             self.gui.tasklb.set_task(task.text)
         else:
             self.gui.tasklb.set_finish()
+            self.game_process = False
 
     def start_progress(self):
         self.gui.progress.reset()
         self.progress_timer = QTimer()
         self.progress_timer.timeout.connect(self.progress_tick)
-        self.progress_timer.start(3000)
+        self.progress_timer.start(self.cfg.progress_timer * 1000)
 
     def progress_tick(self):
         self.gui.progress.increase()
+        value = self.gui.progress.value()
+        if value == self.gui.progress.maximum() and self.game_process:
+            self.gui.tasklb.set_lose()
+            self.progress_timer.stop()
+            self.game_process = False
+            self.gui.tasklb.result.setDisabled(True)
 
 
 if __name__ == '__main__':
