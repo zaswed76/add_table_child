@@ -70,10 +70,6 @@ class Progress(QtWidgets.QProgressBar):
         self.setValue(0)
         self.setTextVisible(False)
 
-    def reset(self):
-        self._value = 0
-
-
     def increase(self):
         self.setValue(self.value() + 1)
 
