@@ -1,6 +1,6 @@
 import os
 import sys
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtGui
 from PyQt5 import QtCore
 
 from add_table import pth
@@ -13,6 +13,22 @@ class Btn(QtWidgets.QPushButton):
         self.setObjectName(name)
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
+class LevelBtn(QtWidgets.QPushButton):
+    def __init__(self, name, parent):
+        super().__init__()
+        size = QtCore.QSize(35, 35)
+        self.name = str(name)
+        self.setCheckable(True)
+        self.setAutoExclusive(True)
+        self.setObjectName("level_btn_" + self.name)
+        pth_icon = os.path.join(pth.ICON, self.name +"v" +  ".png")
+        self.setIconSize(size)
+        self.setFixedSize(size)
+        if os.path.isfile(pth_icon):
+            self.setIcon(QtGui.QIcon(pth_icon))
+        else:
+            self.setText(self.name)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
 
 
 class TaskLabel(QtWidgets.QFrame):
@@ -54,10 +70,11 @@ class Progress(QtWidgets.QProgressBar):
         self.setValue(0)
         self.setTextVisible(False)
 
+    def reset(self):
+        self._value = 0
 
 
     def increase(self):
-
         self.setValue(self.value() + 1)
 
 

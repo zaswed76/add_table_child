@@ -20,7 +20,7 @@ class Operator():
         return self.operations[self.operator_line]["meth"](*args)
 
 
-#
+
 
 
 
@@ -64,6 +64,7 @@ class AddTableGame:
         self._current_task = task
 
     def check_answer(self, answer):
+
         if int(answer) == self.current_task.answer:
             return True
 
@@ -80,8 +81,12 @@ class AddTableGame:
         else:
             return None
 
+    def run_new_game(self):
+        self.cursor = -1
+
 
     def create_tasks(self, level: int, operator_line: str, mix=False):
+        self.tasks.clear()
         for t in range(1, 10):
             self.tasks.append(Task(level, t, operator_line))
         if mix:

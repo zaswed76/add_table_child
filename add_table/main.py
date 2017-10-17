@@ -39,7 +39,7 @@ class Process(QObject):
     def start_timer(self):
         pass
 
-class Main:
+class Main(QtCore.QObject):
     num_keys = {
         QtCore.Qt.Key_0: "0", QtCore.Qt.Key_1: "1", QtCore.Qt.Key_2: "2",
         QtCore.Qt.Key_3: "3", QtCore.Qt.Key_4: "4", QtCore.Qt.Key_5: "5",
@@ -47,13 +47,17 @@ class Main:
         QtCore.Qt.Key_9: "9"
     }
     def __init__(self):
+        super().__init__()
         self.text = []
-
-        self.game_manager = game_manager.GameManager()
-        self.game_manager.add_game(add_table.AddTableGame("add_table"))
         self.cfg = config.Config(pth.CONFIG)
         self.app_cfg = app.Config(pth.APPEARANCE)
         self.game_stat = game_stat.GameStat(self.cfg)
+        self.game_manager = game_manager.GameManager()
+        self.add_table_game = add_table.AddTableGame("add_table")
+
+        self.game_manager.add_game(self.add_table_game)
+
+
 
         self._init_gui()
 
@@ -79,32 +83,54 @@ class Main:
 
         # region start button
         self.start_btn = main_widget.Btn("start_btn", self)
-        # self.start_btn.setFixedSize(*self.app_cfg.btn_size)
         self.tool.add_widget(self.start_btn)
+        self.start_btn.setFocus()
         # endregion
 
-        self.level_ctrl = tool.Levels_Controls()
+        self.send_time_btn = main_widget.Btn("send_time_btn", self)
+        self.send_time_btn.setCheckable(True)
+        self.send_time_btn.setChecked(False)
+        self.tool.add_widget(self.send_time_btn)
+
+        ctrls_lst = [2, 3, 4, 5,
+                     6, 7, 8, 9]
+        controls = [main_widget.LevelBtn(x, self) for x in ctrls_lst]
+        self.level_ctrl = tool.Levels_Controls(self.game_stat)
+        self.level_ctrl.set_controls(controls)
+
+
         self.tool.add_stretch(50)
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(50)
 
         # region config button
         self.cfg_btn = main_widget.Btn("cfg_btn", self)
-        # self.cfg_btn.setFixedSize(*self.app_cfg.btn_size)
         self.tool.add_widget(self.cfg_btn)
         # endregion
 
 
-        # self.gui.start_btn.clicked.connect(self.start_game)
-        # self.gui.cfg_btn.clicked.connect(self.open_config_wiget)
-        # self.gui.start_btn.setFocus()
+        self.start_btn.clicked.connect(self.start_game)
+        self.cfg_btn.clicked.connect(self.open_config_wiget)
+        self.send_time_btn.clicked.connect(self.checked_progress_timer)
+        for gc in controls:
+            gc.clicked.connect(self.choose_level)
+
+    def checked_progress_timer(self):
+        self.cfg.progress_timer_checked = self.send_time_btn.isChecked()
+
+    def choose_level(self):
+        sender = self.sender()
+        self.game_stat.current_level = sender.name
+        self.start_game()
 
     def start_game(self):
         range_timer = self.cfg.timer
         self.current_game = self.game_manager[self.cfg.current_game]
-        self.current_game.create_tasks(2, "add", mix=self.cfg.mix)
+        self.current_game.create_tasks(int(self.game_stat.current_level), "add", mix=self.cfg.mix)
+        self.current_game.run_new_game()
         self.next_step()
-        self.start_progress()
+        if self.cfg.progress_timer_checked:
+            self.start_progress()
         if range_timer:
             self.timer = QTimer()
             self.timer.timeout.connect(self.tick)
@@ -136,7 +162,10 @@ class Main:
         except AttributeError:
             pass
         answer = self.gui.tasklb.result.text()
+
         result = self.current_game.check_answer(answer)
+
+
         if result:
             self.gui.tasklb.result.clear()
             self.gui.tasklb.result.clear()
@@ -158,6 +187,7 @@ class Main:
             self.gui.tasklb.set_finish()
 
     def start_progress(self):
+        self.gui.progress.reset()
         self.progress_timer = QTimer()
         self.progress_timer.timeout.connect(self.progress_tick)
         self.progress_timer.start(3000)

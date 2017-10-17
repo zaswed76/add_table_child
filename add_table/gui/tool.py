@@ -3,12 +3,24 @@ import sys
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 class Levels_Controls(QtWidgets.QFrame):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, game_stat):
+        super().__init__()
+
+        self.game_stat = game_stat
 
         self.box = QtWidgets.QHBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
-        self.box.setSpacing(0)
+        self.box.setSpacing(5)
+
+    def add_ctrl(self, ctrl):
+        self.box.addWidget(ctrl)
+
+    def set_controls(self, controls: list):
+        for c in controls:
+            if c.name == self.game_stat.current_level:
+                c.setChecked(True)
+            self.add_ctrl(c)
+
 
 class Tool(QtWidgets.QFrame):
 

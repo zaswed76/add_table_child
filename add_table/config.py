@@ -9,6 +9,14 @@ class Config(config_lib.Config):
 
 
     @property
+    def levels(self):
+        return self.data["levels"]
+
+    @property
+    def current_level(self):
+        return self.data["current_level"]
+
+    @property
     def current_game(self):
         return self.data["current_game"]
 
@@ -19,3 +27,14 @@ class Config(config_lib.Config):
     @property
     def mix(self):
         return self.data["mix"]
+    @property
+    def progress_timer(self):
+        return self.data["progress_timer"]
+
+    @property
+    def progress_timer_checked(self):
+        return self.data["progress_timer_checked"]
+
+    @progress_timer_checked.setter
+    def progress_timer_checked(self, v):
+        self.data["progress_timer_checked"] = v
