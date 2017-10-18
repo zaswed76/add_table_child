@@ -8,7 +8,7 @@ from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot, \
     QTimer
 
 from add_table import pth
-from add_table.gui import main_widget, config_widget, tool
+from add_table.gui import main_widget, config_widget, tool, grade
 from add_table import game_manager, game_stat, config, app
 from add_table.games import add_table
 
@@ -74,10 +74,11 @@ class Main(QtCore.QObject):
         app.setStyleSheet(open(pth.CSS_STYLE, "r").read())
         self.gui = main_widget.Widget(self.app_cfg)
         self.gui.keyPressEvent = self.keyPressEvent
+        self._init_tool()
         self.gui.show()
         self.gui.resize(*self.app_cfg.size_window)
 
-        self._init_tool()
+
 
         sys.exit(app.exec_())
 
@@ -110,17 +111,16 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(50)
 
+        self.grade = grade.Grade(42, 42)
+        self.tool.add_widget(self.grade)
+        self.tool.add_stretch(50)
+
         # region config button
         self.cfg_btn = main_widget.Btn("cfg_btn", self)
         self.tool.add_widget(self.cfg_btn)
         # endregion
 
-        self.gate = main_widget.Gate(
-            os.path.join(pth.ICON, "gate.png"), self.tool)
-        self.gate.setFixedSize(self.tool.size().width(),
-                               self.app_cfg.size_window[0])
-        self.gate.setVisible(False)
-        # self.gate.setStyleSheet("background-color: green")
+
 
         self.start_btn.clicked.connect(self.start_game)
         self.stop_btn.clicked.connect(self.stop_game)
@@ -139,7 +139,6 @@ class Main(QtCore.QObject):
         self.stop_game()
 
     def stop_game(self):
-        # self.gate.setVisible(False)
         self.game_process = False
         self.send_time_btn.setDisabled(False)
         self.gui.tasklb.result.setDisabled(True)
@@ -155,7 +154,7 @@ class Main(QtCore.QObject):
 
     def start_game(self):
         self.game_process = True
-        # self.gate.setVisible(True)
+
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")

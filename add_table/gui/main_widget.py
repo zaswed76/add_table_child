@@ -115,13 +115,9 @@ class Widget(QtWidgets.QFrame):
         self.task_progress = Progress("task_progress")
         self.game_progress.add_progress(self.task_progress)
 
+
+
     def set_tool(self, tool, direct):
         self.box.insertWidget(direct, tool)
 
 
-class Gate(QtWidgets.QLabel):
-    def __init__(self, image, parent):
-        super().__init__()
-        self.setParent(parent)
-        pxm = QtGui.QPixmap(image)
-        self.setPixmap(pxm)

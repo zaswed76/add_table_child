@@ -120,6 +120,33 @@ LevelBtn:disabled {
     color: #818181;
 }
 
+GradeBtn#first {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#second {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: 1px solid #a9a9a9;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#third {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: 1px solid #a9a9a9;
+    border-left: 1px solid #a9a9a9;
+}
+
+Grade {
+    /*border-top: 1px solid #a9a9a9;*/
+    /*border-right: 1px solid #a9a9a9;*/
+    /*border-bottom: 1px solid #a9a9a9;*/
+    /*border-left: 1px solid #a9a9a9;*/
+}
 
 QLineEdit#result {
     font: 60pt "Source Sans Pro";
