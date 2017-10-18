@@ -1,3 +1,4 @@
+import os
 import sys
 
 import time
@@ -114,11 +115,12 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.cfg_btn)
         # endregion
 
-        self.gate = QtWidgets.QLabel(self.tool)
+        self.gate = main_widget.Gate(
+            os.path.join(pth.ICON, "gate.png"), self.tool)
         self.gate.setFixedSize(self.tool.size().width(),
                                self.app_cfg.size_window[0])
         self.gate.setVisible(False)
-        self.gate.setStyleSheet("background-color: green")
+        # self.gate.setStyleSheet("background-color: green")
 
         self.start_btn.clicked.connect(self.start_game)
         self.stop_btn.clicked.connect(self.stop_game)
@@ -137,7 +139,7 @@ class Main(QtCore.QObject):
         self.stop_game()
 
     def stop_game(self):
-        self.gate.setVisible(False)
+        # self.gate.setVisible(False)
         self.game_process = False
         self.send_time_btn.setDisabled(False)
         self.gui.tasklb.result.setDisabled(True)
@@ -153,7 +155,7 @@ class Main(QtCore.QObject):
 
     def start_game(self):
         self.game_process = True
-        self.gate.setVisible(True)
+        # self.gate.setVisible(True)
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
@@ -240,7 +242,8 @@ class Main(QtCore.QObject):
     def progress_tick(self):
         self.gui.progress.increase(1)
         value = self.gui.progress.value()
-        if value == self.gui.progress.maximum() and self.game_process:
+        if (value == self.gui.progress.maximum() and
+                self.game_process):
             self.stop_game()
             self.gui.tasklb.set_lose()
 

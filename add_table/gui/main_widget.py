@@ -119,4 +119,9 @@ class Widget(QtWidgets.QFrame):
         self.box.insertWidget(direct, tool)
 
 
-
+class Gate(QtWidgets.QLabel):
+    def __init__(self, image, parent):
+        super().__init__()
+        self.setParent(parent)
+        pxm = QtGui.QPixmap(image)
+        self.setPixmap(pxm)
