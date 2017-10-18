@@ -111,9 +111,9 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(50)
 
-        self.grade = grade.Grade(42, 42)
-        self.tool.add_widget(self.grade)
-        self.tool.add_stretch(50)
+        # self.grade = grade.Grade(42, 42)
+        # self.tool.add_widget(self.grade)
+        # self.tool.add_stretch(50)
 
         # region config button
         self.cfg_btn = main_widget.Btn("cfg_btn", self)
