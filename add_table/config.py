@@ -35,6 +35,12 @@ class Config(config_lib.Config):
     def progress_timer_checked(self):
         return self.data["progress_timer_checked"]
 
+    @property
+    def progress_max(self):
+        return self.data["progress_max"]
+
     @progress_timer_checked.setter
     def progress_timer_checked(self, v):
         self.data["progress_timer_checked"] = v
+
+

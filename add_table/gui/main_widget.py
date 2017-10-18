@@ -44,19 +44,30 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.result.setFixedSize(100, 100)
 
     def set_finish(self):
-        self.form.task.setText("{}".format("ВЫИГРАЛ"))
+        self.form.setStyleSheet("color: green")
+        self.form.task.setText("{}".format("win!"))
+
 
     def set_lose(self):
-        self.form.task.setText("{}".format("ПРОИГРАЛ"))
+        self.form.setStyleSheet("color: red")
+        self.form.task.setText("{}".format("loss"))
+
+    def set_color(self, color):
+        self.form.setStyleSheet("color: {}".format(color))
 
     def set_task(self, task: str):
         self.form.task.setText("{}".format(task))
 
+    def clear_task(self):
+        self.form.task.clear()
+
+    def clear_result(self):
+        self.form.result.clear()
 
 class GameProgress(QtWidgets.QFrame):
     def __init__(self):
         super().__init__()
-        self.box = QtWidgets.QHBoxLayout(self)
+        self.box = QtWidgets.QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.setFixedHeight(100)
 
@@ -66,15 +77,15 @@ class GameProgress(QtWidgets.QFrame):
         self.box.addWidget(progress)
 
 class Progress(QtWidgets.QProgressBar):
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
+        self.setObjectName(name)
         self._value = 0
-        self.setMaximum(10)
         self.setValue(0)
         self.setTextVisible(False)
 
-    def increase(self):
-        self.setValue(self.value() + 1)
+    def increase(self, v):
+        self.setValue(self.value() + v)
 
 
 
@@ -98,8 +109,11 @@ class Widget(QtWidgets.QFrame):
 
 
 
-        self.progress = Progress()
+        self.progress = Progress("timer")
         self.game_progress.add_progress(self.progress)
+
+        self.task_progress = Progress("task_progress")
+        self.game_progress.add_progress(self.task_progress)
 
     def set_tool(self, tool, direct):
         self.box.insertWidget(direct, tool)

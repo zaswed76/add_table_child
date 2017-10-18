@@ -12,6 +12,7 @@ class Levels_Controls(QtWidgets.QFrame):
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(5)
 
+
     def add_ctrl(self, ctrl):
         self.box.addWidget(ctrl)
 
@@ -33,6 +34,8 @@ class Tool(QtWidgets.QFrame):
         self.box = QtWidgets.QHBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(0)
+
+
 
     def add_widget(self, w):
         self.box.addWidget(w, QtCore.Qt.AlignLeft)

@@ -3,6 +3,26 @@ QFrame#main_widget {
     background-color: #d1d1d1;
 }
 
+Btn#stop_btn {
+    image: url(./resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    min-height: 30px;
+    min-width: 30px;
+    margin-left: 20px;
+}
+
+Btn#stop_btn:hover {
+    image: url(./resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
 Btn#start_btn {
     image: url(./resource/icons/start_btn.png);
     border-top: none;
@@ -12,6 +32,14 @@ Btn#start_btn {
     min-height: 30px;
     min-width: 30px;
     margin-left: 20px;
+}
+
+Btn#start_btn:hover {
+    image: url(./resource/icons/start_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 
 }
 
@@ -39,14 +67,7 @@ Btn#send_time_btn:checked {
 
 }
 
-Btn#start_btn:hover {
-    image: url(./resource/icons/start_btn_hover.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
 
-}
 
 Btn#cfg_btn {
     image: url(./resource/icons/cfg.png);
@@ -117,6 +138,12 @@ Tool {
     max-height: 45px;
 }
 
-Levels_Controls {
-    /*background-color: #3d45d1;*/
+QProgressBar {
+    border: 1px solid grey;
+    border-radius: 5px;
+    max-height: 6px;
 }
+ QProgressBar::chunk {
+     background-color: #05B8CC;
+
+ }
