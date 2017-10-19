@@ -240,6 +240,8 @@ class Main(QtCore.QObject):
             self.gui.tasklb.set_lose()
 
     def keyPressEvent(self, QKeyEvent):
+            if QKeyEvent.key() == QtCore.Qt.Key_Q and not self.game_process:
+                self.start_game()
             if QKeyEvent.key() == QtCore.Qt.Key_Return:
                 self.accept_answer()
             elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
