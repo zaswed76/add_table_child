@@ -47,6 +47,13 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.setStyleSheet("color: green")
         self.form.task.setText("{}".format("win!"))
 
+    def lose_effect(self):
+
+        self.form.result.setStyleSheet("border: 6px solid red;")
+        QtWidgets.qApp.processEvents()
+        QtCore.QThread.msleep(800)
+        self.form.result.setStyleSheet("border: none;")
+
 
     def set_lose(self):
         self.form.setStyleSheet("color: red")
@@ -73,7 +80,6 @@ class GameProgress(QtWidgets.QFrame):
 
 
     def add_progress(self, progress):
-
         self.box.addWidget(progress)
 
 class Progress(QtWidgets.QProgressBar):

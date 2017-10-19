@@ -144,6 +144,7 @@ class Main(QtCore.QObject):
         self.gui.tasklb.result.setDisabled(True)
 
         self.gui.progress.reset()
+        self.gui.task_progress.reset()
         try:
             self.progress_timer.stop()
         except AttributeError:
@@ -154,6 +155,7 @@ class Main(QtCore.QObject):
 
     def start_game(self):
         self.game_process = True
+
 
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
@@ -180,18 +182,7 @@ class Main(QtCore.QObject):
     def tick(self):
         self.next_step()
 
-    def keyPressEvent(self, QKeyEvent):
-        if self.game_process:
-            if QKeyEvent.key() == QtCore.Qt.Key_Return:
-                self.accept_answer()
-            elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
-                self.text.clear()
-                self.gui.tasklb.result.clear()
-            elif self.gui.tasklb.task.text():
-                sign = self.num_keys.get(QKeyEvent.key())
-                if sign in self.num_keys.values():
-                    self.text.append(sign)
-                    self.gui.tasklb.result.setText("".join(self.text))
+
 
     def accept_answer(self):
         try:
@@ -199,8 +190,9 @@ class Main(QtCore.QObject):
         except AttributeError:
             pass
         answer = self.gui.tasklb.result.text()
-
-        result = self.current_game.check_answer(answer)
+        if answer:
+            result = self.current_game.check_answer(answer)
+        else: result = False
 
         if result:
             self.gui.task_progress.increase(1)
@@ -211,6 +203,7 @@ class Main(QtCore.QObject):
         else:
             self.text.clear()
             self.gui.tasklb.result.clear()
+            self.gui.tasklb.lose_effect()
         try:
             self.timer.start()
         except AttributeError:
@@ -245,6 +238,18 @@ class Main(QtCore.QObject):
                 self.game_process):
             self.stop_game()
             self.gui.tasklb.set_lose()
+
+    def keyPressEvent(self, QKeyEvent):
+            if QKeyEvent.key() == QtCore.Qt.Key_Return:
+                self.accept_answer()
+            elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
+                self.text.clear()
+                self.gui.tasklb.result.clear()
+            elif self.gui.tasklb.task.text():
+                sign = self.num_keys.get(QKeyEvent.key())
+                if sign in self.num_keys.values():
+                    self.text.append(sign)
+                    self.gui.tasklb.result.setText("".join(self.text))
 
 
 if __name__ == '__main__':
