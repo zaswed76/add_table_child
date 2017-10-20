@@ -9,8 +9,8 @@ Btn#stop_btn {
     border-right: none;
     border-bottom: none;
     border-left: none;
-    min-height: 30px;
-    min-width: 30px;
+    /*min-height: 30px;*/
+    /*min-width: 30px;*/
     margin-left: 20px;
 }
 
@@ -29,8 +29,8 @@ Btn#start_btn {
     border-right: none;
     border-bottom: none;
     border-left: none;
-    min-height: 30px;
-    min-width: 30px;
+    /*min-height: 30px;*/
+    /*min-width: 30px;*/
     margin-left: 20px;
 }
 
@@ -49,8 +49,8 @@ Btn#send_time_btn {
     border-right: none;
     border-bottom: none;
     border-left: none;
-    min-height: 30px;
-    min-width: 30px;
+    /*min-height: 30px;*/
+    /*min-width: 30px;*/
     margin-left: 20px;
 
 }
@@ -61,8 +61,8 @@ Btn#send_time_btn:checked {
     border-right: none;
     border-bottom: none;
     border-left: none;
-    min-height: 30px;
-    min-width: 30px;
+    /*min-height: 30px;*/
+    /*min-width: 30px;*/
     margin-left: 20px;
 
 }
@@ -120,10 +120,15 @@ LevelBtn:disabled {
     color: #818181;
 }
 
+GradeBtn {
+    border: none;
+    background-color: #39991d;
+}
+
 GradeBtn#first {
     border-top: 1px solid #a9a9a9;
     border-right: 1px solid #a9a9a9;
-    border-bottom: none;
+    border-bottom: 1px solid #a9a9a9;
     border-left: 1px solid #a9a9a9;
 }
 
@@ -164,7 +169,7 @@ GameLabel {
 
 Tool {
     background-color: #3a7c99;
-    max-height: 45px;
+    /*max-height: 45px;*/
 }
 
 QProgressBar {

@@ -86,24 +86,24 @@ class Main(QtCore.QObject):
         width, height = self.app_cfg.size_window
         self.tool = tool.Tool(self.app_cfg)
         self.gui.set_tool(self.tool, direct=tool.Tool.Top)
-
-        self.stop_btn = main_widget.Btn("stop_btn", self)
+        size_btn = QtCore.QSize(*self.app_cfg.btn_size)
+        self.stop_btn = main_widget.Btn("stop_btn", size_btn,  self)
         self.tool.add_widget(self.stop_btn)
 
         # region start button
-        self.start_btn = main_widget.Btn("start_btn", self)
+        self.start_btn = main_widget.Btn("start_btn", size_btn, self)
         self.tool.add_widget(self.start_btn)
         self.start_btn.setFocus()
         # endregion
 
-        self.send_time_btn = main_widget.Btn("send_time_btn", self)
+        self.send_time_btn = main_widget.Btn("send_time_btn", size_btn, self)
         self.send_time_btn.setCheckable(True)
         self.send_time_btn.setChecked(False)
         self.tool.add_widget(self.send_time_btn)
 
         ctrls_lst = [2, 3, 4, 5,
                      6, 7, 8, 9]
-        controls = [main_widget.LevelBtn(x, self) for x in ctrls_lst]
+        controls = [main_widget.LevelBtn(x, size_btn, self) for x in ctrls_lst]
         self.level_ctrl = tool.Levels_Controls(self.game_stat)
         self.level_ctrl.set_controls(controls)
 
@@ -111,12 +111,12 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(50)
 
-        # self.grade = grade.Grade(42, 42)
-        # self.tool.add_widget(self.grade)
-        # self.tool.add_stretch(50)
+        self.grade = grade.Grade(size_btn)
+        self.tool.add_widget(self.grade)
+        self.tool.add_stretch(50)
 
         # region config button
-        self.cfg_btn = main_widget.Btn("cfg_btn", self)
+        self.cfg_btn = main_widget.Btn("cfg_btn", size_btn, self)
         self.tool.add_widget(self.cfg_btn)
         # endregion
 

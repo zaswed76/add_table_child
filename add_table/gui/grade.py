@@ -6,21 +6,28 @@ from PyQt5 import QtWidgets, QtCore
 class GradeBtn(QtWidgets.QPushButton):
     def __init__(self, name, parent, size):
         super().__init__()
-        self.setObjectName(name)
+        self.setObjectName(str(name))
         self.setParent(parent)
         self.setFixedSize(size)
 
 class Grade(QtWidgets.QFrame):
-    def __init__(self, width, height):
+    def __init__(self, size):
         super().__init__()
-        self.setFixedSize(width+20, height)
-        size_btn = QtCore.QSize(height/2, height/2)
-        self.first = GradeBtn("first", self, size_btn)
-        self.first.move(width/2-size_btn.width()/2, 0)
-        self.second = GradeBtn("second",self, size_btn)
-        self.second.move(0 -5, size_btn.height())
-        self.third = GradeBtn("third", self, size_btn)
-        self.third.move(width/2, size_btn.height())
+        self.setFixedSize(size)
+        self.size_btn = QtCore.QSize(size.height()/3, size.height()/3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        self.setSizePolicy(sizePolicy)
+
+        self.grid = QtWidgets.QGridLayout(self)
+        self.grid.setContentsMargins(0, 0, 0, 0)
+        self.grid.setSpacing(0)
+        self._create_field()
+
+    def _create_field(self):
+        n = 0
+        for x in range(3):
+            for y in range(3):
+                self.grid.addWidget(GradeBtn(n, self, self.size_btn), x, y)
 
 
 

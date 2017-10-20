@@ -8,15 +8,16 @@ from add_table.gui import tool
 
 
 class Btn(QtWidgets.QPushButton):
-    def __init__(self, name, parent):
+    def __init__(self, name, size,  parent):
         super().__init__()
         self.setObjectName(name)
         self.setCursor(QtCore.Qt.PointingHandCursor)
+        self.setFixedSize(size)
+        self.setIconSize(size)
 
 class LevelBtn(QtWidgets.QPushButton):
-    def __init__(self, name, parent):
+    def __init__(self, name, size, parent):
         super().__init__()
-        size = QtCore.QSize(35, 35)
         self.name = str(name)
         self.setCheckable(True)
         self.setAutoExclusive(True)
