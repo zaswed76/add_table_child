@@ -28,11 +28,12 @@ class Grade(QtWidgets.QFrame):
         self._create_field()
 
     def _create_field(self):
-        _names = {6: "second", 4: "first", 8: "third"}
+        _names_step = {6: "second", 4: "first", 8: "third"}
+        _names_place = {3: "second", 1: "first", 5: "third"}
         n = 0
         for x in range(3):
             for y in range(3):
-                name = _names.get(n, n)
+                name = _names_step.get(n, n)
                 self.grid.addWidget(GradeBtn(name, self, self.size_btn), x, y)
                 n+=1
 
