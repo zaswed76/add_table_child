@@ -122,28 +122,82 @@ LevelBtn:disabled {
 
 GradeBtn {
     border: none;
-    background-color: #39991d;
+    /*background-color: #39991d;*/
 }
 
 GradeBtn#first {
     border-top: 1px solid #a9a9a9;
     border-right: 1px solid #a9a9a9;
-    border-bottom: 1px solid #a9a9a9;
+    border-bottom: none;
     border-left: 1px solid #a9a9a9;
 }
 
 GradeBtn#second {
     border-top: 1px solid #a9a9a9;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: 1px solid #a9a9a9;
+    border-right: none;
+    border-bottom: none;
     border-left: 1px solid #a9a9a9;
 }
 
 GradeBtn#third {
     border-top: 1px solid #a9a9a9;
     border-right: 1px solid #a9a9a9;
-    border-bottom: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+GradeBtn#first:hover {
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
     border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#second:hover {
+    border-top: 1px solid #ffffff;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#third:hover {
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+
+
+GradeBtn#first:checked {
+    border-top: 1px solid #10ff21;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#second:checked {
+    border-top: 1px solid #10ff21;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#third:checked {
+    border-top: 1px solid #10ff21;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+
+
+
+GradeBtn#7 {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 }
 
 Grade {

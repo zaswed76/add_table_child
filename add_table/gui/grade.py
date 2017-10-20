@@ -7,8 +7,12 @@ class GradeBtn(QtWidgets.QPushButton):
     def __init__(self, name, parent, size):
         super().__init__()
         self.setObjectName(str(name))
+        # self.setText(str(name))
         self.setParent(parent)
         self.setFixedSize(size)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+        self.setCheckable(True)
+        self.setAutoExclusive(True)
 
 class Grade(QtWidgets.QFrame):
     def __init__(self, size):
@@ -24,10 +28,13 @@ class Grade(QtWidgets.QFrame):
         self._create_field()
 
     def _create_field(self):
+        _names = {6: "second", 4: "first", 8: "third"}
         n = 0
         for x in range(3):
             for y in range(3):
-                self.grid.addWidget(GradeBtn(n, self, self.size_btn), x, y)
+                name = _names.get(n, n)
+                self.grid.addWidget(GradeBtn(name, self, self.size_btn), x, y)
+                n+=1
 
 
 
