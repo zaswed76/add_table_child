@@ -112,7 +112,7 @@ class Main(QtCore.QObject):
         self.tool.add_stretch(50)
 
         self.grade = grade.Grade(size_btn)
-        self.grade.init_state_grade(1)
+        self.grade.init_state_grade(self.cfg.grade)
         self.tool.add_widget(self.grade)
         self.tool.add_stretch(50)
 
