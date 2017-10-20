@@ -54,9 +54,13 @@ class Grade(QtWidgets.QFrame):
     def change_grade(self):
         s = self.sender()
         step = s.objectName()
+        self.set_grade(step)
+
+    def set_grade(self, step):
         for s, p in self.step_place_link.items():
             if s == step:
                 self.btns[p].setVisible(True)
+                self.btns[s].toggle()
             else:
                 self.btns[p].setVisible(False)
 
