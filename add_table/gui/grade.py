@@ -60,6 +60,7 @@ class Grade(QtWidgets.QFrame):
             else:
                 self.btns[p].setVisible(False)
 
+
     def init_state_grade(self, grade_name):
         self.btns["place_1"].setVisible(False)
         self.btns["place_2"].setVisible(False)
