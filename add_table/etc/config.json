@@ -1,25 +1,27 @@
 {
-  "current_game": "add_table",
-  "timer": 0,
-  "progress_timer_checked": false,
-  "progress_timer": 10,
-  "grade_to_timer": {
-    "step_1": 20,
-    "step_2": 30,
-    "step_3": 40
-  },
-  "mix": true,
-  "levels": {
-    "2": true,
-    "3": false,
-    "4": false,
-    "5": false,
-    "6": false,
-    "7": false,
-    "8": false,
-    "9": false
-  },
-  "current_level": "2",
-  "progress_max": 10000,
-  "grade": "step_1"
+    "current_game": "add_table",
+    "window_title": "Mathematical Trainer",
+    "progress_title": "My progress",
+    "timer": 0,
+    "progress_timer_checked": true,
+    "progress_timer": 10,
+    "grade_to_timer": {
+        "step_1": 20,
+        "step_2": 30,
+        "step_3": 40
+    },
+    "mix": true,
+    "levels": {
+        "2": true,
+        "3": false,
+        "4": false,
+        "5": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": false
+    },
+    "current_level": "2",
+    "progress_max": 10000,
+    "grade": "step_3"
 }

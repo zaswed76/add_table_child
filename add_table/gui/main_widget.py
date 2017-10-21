@@ -102,12 +102,19 @@ class Widget(QtWidgets.QFrame):
 
     def __init__(self, app_cfg):
         super().__init__()
+
         self.app_cfg = app_cfg
 
-        self.setObjectName("main_widget")
-        self.box = QtWidgets.QVBoxLayout(self)
-        self.box.setContentsMargins(0, 0, 0, 0)
+        self.base_widget = QtWidgets.QFrame()
+        self.stack_box = QtWidgets.QStackedLayout(self)
+        self.stack_box.setContentsMargins(0, 0, 0, 0)
+        self.stack_box.setSpacing(0)
+        self.stack_box.addWidget(self.base_widget)
 
+
+        self.setObjectName("main_widget")
+        self.box = QtWidgets.QVBoxLayout(self.base_widget)
+        self.box.setContentsMargins(0, 0, 0, 0)
         self.tasklb = TaskLabel()
         self.box.addWidget(self.tasklb)
         self.game_progress = GameProgress()
@@ -123,8 +130,13 @@ class Widget(QtWidgets.QFrame):
         self.game_progress.add_progress(self.task_progress)
 
 
+    def add_to_stack(self, widget):
+        self.stack_box.addWidget(widget)
 
     def set_tool(self, tool, direct):
         self.box.insertWidget(direct, tool)
+
+    def set_stack(self, widget):
+        self.stack_box.setCurrentWidget(widget)
 
 

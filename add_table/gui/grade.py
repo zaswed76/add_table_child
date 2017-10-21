@@ -17,9 +17,10 @@ class GradeBtn(QtWidgets.QPushButton):
 
 
 class Grade(QtWidgets.QFrame):
-    def __init__(self, size):
+    def __init__(self, cfg, size):
         super().__init__()
 
+        self.cfg = cfg
         self.size_btn = QtCore.QSize(size.height() / 3+2,
                                      size.height() / 3+2)
         sizePolicy = QtWidgets.QSizePolicy(
@@ -58,6 +59,7 @@ class Grade(QtWidgets.QFrame):
         s = self.sender()
         step = s.objectName()
         self.set_grade(step)
+        self.cfg.grade = step
 
     def set_grade(self, step):
         self._current_step = step

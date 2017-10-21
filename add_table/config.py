@@ -43,6 +43,9 @@ class Config(config_lib.Config):
     def grade(self):
         return self.data["grade"]
 
+    @grade.setter
+    def grade(self, v):
+        self.data["grade"] = v
 
     @property
     def grade_to_timer(self):
@@ -51,5 +54,9 @@ class Config(config_lib.Config):
     @progress_timer_checked.setter
     def progress_timer_checked(self, v):
         self.data["progress_timer_checked"] = v
+
+    @property
+    def window_title(self):
+        return self.data["window_title"]
 
 

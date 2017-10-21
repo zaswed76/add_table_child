@@ -73,7 +73,13 @@ class Main(QtCore.QObject):
         app = QtWidgets.QApplication(sys.argv)
         app.setStyleSheet(open(pth.CSS_STYLE, "r").read())
         self.gui = main_widget.Widget(self.app_cfg)
+        self.gui.setWindowTitle(self.cfg.window_title)
+
+        self.config_widget = config_widget.ConfigWidget(self.cfg)
+        self.gui.add_to_stack(self.config_widget)
+
         self.gui.keyPressEvent = self.keyPressEvent
+        self.gui.closeEvent = self.closeEvent
         self._init_tool()
         self.gui.show()
         self.gui.resize(*self.app_cfg.size_window)
@@ -111,7 +117,7 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(50)
 
-        self.grade = grade.Grade(size_btn)
+        self.grade = grade.Grade(self.cfg, size_btn)
         self.tool.add_widget(self.grade)
         self.grade.set_grade(self.cfg.grade)
         self.tool.add_stretch(50)
@@ -159,8 +165,6 @@ class Main(QtCore.QObject):
 
     def start_game(self):
         self.game_process = True
-
-
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
@@ -185,8 +189,7 @@ class Main(QtCore.QObject):
             self.timer.start(range_timer * 1000)
 
     def open_config_wiget(self):
-        self.config_widget = config_widget.ConfigWidget(self.cfg)
-        self.config_widget.show()
+        self.gui.set_stack(self.config_widget)
 
     def tick(self):
         self.next_step()
@@ -266,6 +269,9 @@ class Main(QtCore.QObject):
                     self.text.append(sign)
                     self.gui.tasklb.result.setText("".join(self.text))
 
+
+    def closeEvent(self, *args, **kwargs):
+        self.cfg.save()
 
 if __name__ == '__main__':
     Main()
