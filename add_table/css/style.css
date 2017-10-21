@@ -189,19 +189,20 @@ GradeBtn#step_3:checked {
 }
 
 GradeBtn#place_1 {
-    image: url(./resource/icons/smile_1.png);
+    image: url(./resource/icons/Krosh.png);
 }
 
 GradeBtn#place_2 {
-    image: url(./resource/icons/smile_2.png);
+    image: url(./resource/icons/Krosh_2.png);
 }
 
 GradeBtn#place_3 {
-    image: url(./resource/icons/smile_2.png);
+    image: url(./resource/icons/Krosh_3.png);
 }
 
 
 Grade {
+    margin-bottom: 12px;
     /*border-top: 1px solid #a9a9a9;*/
     /*border-right: 1px solid #a9a9a9;*/
     /*border-bottom: 1px solid #a9a9a9;*/
@@ -223,7 +224,7 @@ GameLabel {
 }
 
 Tool {
-    background-color: #3a7c99;
+    background-color: #306677;
     /*max-height: 45px;*/
 }
 
@@ -236,3 +237,14 @@ QProgressBar {
      background-color: #05B8CC;
 
  }
+
+AddTabSuccess {
+    background-color: #f7eac2;
+
+}
+AddTabSuccess::tab#add
+{
+    background-image : url(./resource/icons/start_btn.png);
+}
+
+

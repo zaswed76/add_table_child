@@ -8,7 +8,7 @@ from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot, \
     QTimer
 
 from add_table import pth
-from add_table.gui import main_widget, config_widget, tool, grade
+from add_table.gui import main_widget, success, tool, grade
 from add_table import game_manager, game_stat, config, app
 from add_table.games import add_table
 
@@ -75,8 +75,20 @@ class Main(QtCore.QObject):
         self.gui = main_widget.Widget(self.app_cfg)
         self.gui.setWindowTitle(self.cfg.window_title)
 
-        self.config_widget = config_widget.ConfigWidget(self.cfg)
-        self.gui.add_to_stack(self.config_widget)
+        self.success_widget = success.SuccessWidget(self.cfg)
+        add_success = success.TabSuccess("add", self.app_cfg,
+                                            self.cfg,
+                                            self.game_stat,
+                                            icon=os.path.join(pth.ICON, "plus.png"))
+        self.success_widget.add_success(add_success)
+
+        multi_success = success.TabSuccess("multi", self.app_cfg,
+                                            self.cfg,
+                                            self.game_stat,
+                                            icon=os.path.join(pth.ICON, "multi.png"))
+        self.success_widget.add_success(multi_success)
+
+        self.gui.add_to_stack(self.success_widget)
 
         self.gui.keyPressEvent = self.keyPressEvent
         self.gui.closeEvent = self.closeEvent
@@ -189,7 +201,7 @@ class Main(QtCore.QObject):
             self.timer.start(range_timer * 1000)
 
     def open_config_wiget(self):
-        self.gui.set_stack(self.config_widget)
+        self.gui.set_stack(self.success_widget)
 
     def tick(self):
         self.next_step()
