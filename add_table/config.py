@@ -43,6 +43,11 @@ class Config(config_lib.Config):
     def grade(self):
         return self.data["grade"]
 
+
+    @property
+    def grade_to_timer(self):
+        return self.data["grade_to_timer"]
+
     @progress_timer_checked.setter
     def progress_timer_checked(self, v):
         self.data["progress_timer_checked"] = v

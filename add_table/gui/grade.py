@@ -19,9 +19,9 @@ class GradeBtn(QtWidgets.QPushButton):
 class Grade(QtWidgets.QFrame):
     def __init__(self, size):
         super().__init__()
-        self.setFixedSize(size)
-        self.size_btn = QtCore.QSize(size.height() / 3,
-                                     size.height() / 3)
+
+        self.size_btn = QtCore.QSize(size.height() / 3+2,
+                                     size.height() / 3+2)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Maximum,
             QtWidgets.QSizePolicy.Maximum)
@@ -47,7 +47,10 @@ class Grade(QtWidgets.QFrame):
             for y in range(3):
                 name = self._names_grid[n]
                 self.btns[name] = GradeBtn(name, self, self.size_btn)
-                self.btns[name].clicked.connect(self.change_grade)
+                if name in self.step_place_link.keys():
+                    self.btns[name].clicked.connect(self.change_grade)
+                else:
+                    self.btns[name].setDisabled(True)
                 self.grid.addWidget(self.btns[name], x, y)
                 n += 1
 
@@ -57,6 +60,7 @@ class Grade(QtWidgets.QFrame):
         self.set_grade(step)
 
     def set_grade(self, step):
+        self._current_step = step
         for s, p in self.step_place_link.items():
             if s == step:
                 self.btns[p].setVisible(True)
@@ -64,6 +68,9 @@ class Grade(QtWidgets.QFrame):
             else:
                 self.btns[p].setVisible(False)
 
+    @property
+    def current_step(self):
+        return self._current_step
 
     def init_state_grade(self, grade_name):
         self.btns["place_1"].setVisible(False)

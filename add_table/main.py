@@ -145,6 +145,7 @@ class Main(QtCore.QObject):
         self.game_process = False
         self.send_time_btn.setDisabled(False)
         self.gui.tasklb.result.setDisabled(True)
+        self.grade.setDisabled(False)
 
         self.gui.progress.reset()
         self.gui.task_progress.reset()
@@ -163,7 +164,7 @@ class Main(QtCore.QObject):
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
-        range_timer = self.cfg.timer
+
         self.current_game = self.game_manager[self.cfg.current_game]
         self.current_game.create_tasks(
             int(self.game_stat.current_level), "add",
@@ -173,6 +174,11 @@ class Main(QtCore.QObject):
         self.start_task_progress()
         if self.cfg.progress_timer_checked:
             self.start_progress()
+        # слайд
+        self.start_range_timer()
+
+    def start_range_timer(self):
+        range_timer = self.cfg.timer
         if range_timer:
             self.timer = QTimer()
             self.timer.timeout.connect(self.tick)
@@ -226,7 +232,11 @@ class Main(QtCore.QObject):
         self.progress_timer = QTimer()
         self.gui.progress.setMaximum(self.cfg.progress_max)
         self.progress_timer.timeout.connect(self.progress_tick)
-        self.progress_timer.start(self.cfg.progress_timer)
+        grade = self.grade.current_step
+        progress_range = self.cfg.grade_to_timer[grade]
+
+        self.progress_timer.start(progress_range)
+        self.grade.setDisabled(True)
 
     def start_task_progress(self):
         self.gui.task_progress.reset()
@@ -235,7 +245,7 @@ class Main(QtCore.QObject):
             len(self.current_game.tasks))
 
     def progress_tick(self):
-        self.gui.progress.increase(1)
+        self.gui.progress.increase(10)
         value = self.gui.progress.value()
         if (value == self.gui.progress.maximum() and
                 self.game_process):
