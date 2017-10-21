@@ -2,6 +2,12 @@ import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
 
 
+class SuccessLabel(QtWidgets.QLabel):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.setFixedHeight(33)
+        self.setFixedWidth(25*12)
+
 
 class TabSuccess(QtWidgets.QFrame):
     def __init__(self, name, app_cfg, cfg, game_stat, icon=None):
@@ -12,6 +18,25 @@ class TabSuccess(QtWidgets.QFrame):
         self.game_stat = game_stat
         self.cfg = cfg
         self.app_cfg = app_cfg
+
+        self.box = QtWidgets.QVBoxLayout(self)
+        self.box.setContentsMargins(0, 0, 0, 0)
+        self.box.setSpacing(0)
+
+
+        for lb in range(9):
+            lb = SuccessLabel()
+            self.box.addWidget(lb)
+
+        rect = QtCore.QRect(0, 0, *app_cfg.size_window)
+        tr = rect.topRight()
+        self.home_btn = QtWidgets.QPushButton(self)
+        self.home_btn.setObjectName("home_btn")
+        size_btn = QtCore.QSize(35, 35)
+        x = tr.x() - size_btn.width()*2
+        self.home_btn.setIconSize(size_btn)
+        self.home_btn.move(x, 0)
+
 
 
 
@@ -35,7 +60,6 @@ class SuccessWidget(QtWidgets.QDialog):
 
     def add_success(self, tab):
         self.tab.addTab(tab, tab.icon, "")
-
 
 
 if __name__ == '__main__':

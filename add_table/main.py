@@ -80,12 +80,14 @@ class Main(QtCore.QObject):
                                             self.cfg,
                                             self.game_stat,
                                             icon=os.path.join(pth.ICON, "plus.png"))
+        add_success.home_btn.clicked.connect(self.show_base_window)
         self.success_widget.add_success(add_success)
 
         multi_success = success.TabSuccess("multi", self.app_cfg,
                                             self.cfg,
                                             self.game_stat,
                                             icon=os.path.join(pth.ICON, "multi.png"))
+        multi_success.home_btn.clicked.connect(self.show_base_window)
         self.success_widget.add_success(multi_success)
 
         self.gui.add_to_stack(self.success_widget)
@@ -99,6 +101,9 @@ class Main(QtCore.QObject):
 
 
         sys.exit(app.exec_())
+
+    def show_base_window(self):
+        self.gui.set_stack(self.gui.base_widget)
 
     def _init_tool(self):
         width, height = self.app_cfg.size_window

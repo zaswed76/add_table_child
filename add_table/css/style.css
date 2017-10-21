@@ -248,3 +248,20 @@ AddTabSuccess::tab#add
 }
 
 
+SuccessLabel {
+
+    background-color: qlineargradient(spread: pad, x1:0.517, y1:1,
+    x2:0.506, y2:0,
+    stop:0 rgb(208, 208, 208),
+    stop:1 rgb(224, 224, 224));
+
+    /*border-top: 1px solid #a9a9a9;*/
+    /*border-right: 1px solid #a9a9a9;*/
+    /*border-bottom: none;*/
+    /*border-left: 1px solid #a9a9a9;*/
+}
+
+QPushButton#home_btn {
+    border: none;
+    image: url(./resource/icons/home.png);
+}
