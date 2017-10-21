@@ -21,8 +21,8 @@ class Grade(QtWidgets.QFrame):
         super().__init__()
 
         self.cfg = cfg
-        self.size_btn = QtCore.QSize(size.height() / 3+2,
-                                     size.height() / 3+2)
+        self.size_btn = QtCore.QSize(size.height() / 3+10,
+                                     size.height() / 3+10)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Maximum,
             QtWidgets.QSizePolicy.Maximum)

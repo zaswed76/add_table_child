@@ -59,14 +59,12 @@ Btn#send_time_btn:checked {
 
 }
 
-Btn#cfg_btn {
-    image: url(./resource/icons/cfg.png);
+Btn#success_btn {
+    image: url(./resource/icons/success.png);
     border-top: none;
     border-right: none;
     border-bottom: none;
     border-left: none;
-    min-height: 30px;
-    min-width: 30px;
     margin-right: 20px;
 }
 

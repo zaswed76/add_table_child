@@ -145,7 +145,9 @@ class Main(QtCore.QObject):
 
 
         # region config button
-        self.cfg_btn = main_widget.Btn("cfg_btn", size_btn, self)
+        _size = QtCore.QSize(79, 79)
+        self.cfg_btn = main_widget.Btn("success_btn", _size, self)
+        self.cfg_btn.setIconSize(_size)
         self.tool.add_widget(self.cfg_btn)
         # endregion
 
@@ -153,7 +155,7 @@ class Main(QtCore.QObject):
 
         self.start_btn.clicked.connect(self.start_game)
         self.stop_btn.clicked.connect(self.stop_game)
-        self.cfg_btn.clicked.connect(self.open_config_wiget)
+        self.cfg_btn.clicked.connect(self.open_success)
         self.send_time_btn.clicked.connect(
             self.checked_progress_timer)
         for gc in controls:
@@ -208,7 +210,7 @@ class Main(QtCore.QObject):
             self.timer.timeout.connect(self.tick)
             self.timer.start(range_timer * 1000)
 
-    def open_config_wiget(self):
+    def open_success(self):
         self.gui.set_stack(self.success_widget)
 
     def tick(self):
