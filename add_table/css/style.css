@@ -3,212 +3,6 @@ QFrame#main_widget {
     background-color: #d1d1d1;
 }
 
-Btn#stop_btn {
-    image: url(./resource/icons/stop_btn.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    /*min-height: 30px;*/
-    /*min-width: 30px;*/
-    margin-left: 20px;
-}
-
-Btn#stop_btn:hover {
-    image: url(./resource/icons/stop_btn.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-
-}
-
-Btn#start_btn {
-    image: url(./resource/icons/start_btn.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    /*min-height: 30px;*/
-    /*min-width: 30px;*/
-    margin-left: 20px;
-}
-
-Btn#start_btn:hover {
-    image: url(./resource/icons/start_btn.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-
-}
-
-Btn#send_time_btn {
-    image: url(./resource/icons/sand_unchecked.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    /*min-height: 30px;*/
-    /*min-width: 30px;*/
-    margin-left: 20px;
-
-}
-
-Btn#send_time_btn:checked {
-    image: url(./resource/icons/sand.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    /*min-height: 30px;*/
-    /*min-width: 30px;*/
-    margin-left: 20px;
-
-}
-
-
-
-Btn#cfg_btn {
-    image: url(./resource/icons/cfg.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    min-height: 30px;
-    min-width: 30px;
-    margin-right: 20px;
-}
-
-LevelBtn {
-    border-radius: 4px ;
-    border-top: 1px solid #e9e9e9;
-    border-right: 1px solid #e9e9e9;
-    border-bottom: 1px solid #e9e9e9;
-    border-left: 1px solid #e9e9e9;
-    font-family: Helvetica;
-    font-size: 12pt;
-    color: #313131;
-}
-
-LevelBtn:checked {
-
-    border-top: 1px solid #e9e9e9;
-    border-right: 1px solid #e9e9e9;
-    border-bottom: 2px solid #10ff21;
-    border-left: 1px solid #e9e9e9;
-    font-family: Helvetica;
-    font-size: 12pt;
-    color: #313131;
-}
-
-LevelBtn:hover {
-    border-top: 2px solid #f6f2ff;
-    border-right: 2px solid #f6f2ff;
-    border-bottom: 2px solid #f6f2ff;
-    border-left: 2px solid #f6f2ff;
-}
-
-
-LevelBtn:disabled {
-    border-top: 1px solid #a9a9a9;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: 1px solid #a9a9a9;
-    border-left: 1px solid #a9a9a9;
-    font-family: Helvetica;
-    font-size: 12pt;
-    color: #818181;
-}
-
-GradeBtn {
-    border: none;
-    /*background-color: #39991d;*/
-}
-
-GradeBtn#step_1 {
-    border-top: 1px solid #a9a9a9;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_1:hover {
-    border-top: 1px solid #ffffff;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_1:checked {
-    border-top: 1px solid #10ff21;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_2 {
-    border-top: 1px solid #a9a9a9;
-    border-right: none;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_2:hover {
-    border-top: 1px solid #ffffff;
-    border-right: none;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_2:checked {
-    border-top: 1px solid #10ff21;
-    border-right: none;
-    border-bottom: none;
-    border-left: 1px solid #a9a9a9;
-}
-
-GradeBtn#step_3 {
-    border-top: 1px solid #a9a9a9;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: none;
-}
-
-GradeBtn#step_3:hover {
-    border-top: 1px solid #ffffff;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: none;
-}
-
-GradeBtn#step_3:checked {
-    border-top: 1px solid #10ff21;
-    border-right: 1px solid #a9a9a9;
-    border-bottom: none;
-    border-left: none;
-}
-
-GradeBtn#place_1 {
-    image: url(./resource/icons/Krosh.png);
-}
-
-GradeBtn#place_2 {
-    image: url(./resource/icons/Krosh_2.png);
-}
-
-GradeBtn#place_3 {
-    image: url(./resource/icons/Krosh_3.png);
-}
-
-
-Grade {
-    margin-bottom: 12px;
-    /*border-top: 1px solid #a9a9a9;*/
-    /*border-right: 1px solid #a9a9a9;*/
-    /*border-bottom: 1px solid #a9a9a9;*/
-    /*border-left: 1px solid #a9a9a9;*/
-}
-
 QLineEdit#result {
     font: 60pt "Source Sans Pro";
     background-color: rgb(249, 236, 200);
@@ -223,37 +17,36 @@ GameLabel {
     background-color: #d1d1d1;
 }
 
-Tool {
-    background-color: #306677;
-    /*max-height: 45px;*/
-}
 
 QProgressBar {
     border: 1px solid grey;
     border-radius: 5px;
     max-height: 6px;
 }
- QProgressBar::chunk {
-     background-color: #05B8CC;
 
- }
+QProgressBar::chunk {
+    background-color: #05B8CC;
+
+}
 
 AddTabSuccess {
     background-color: #f7eac2;
 
 }
-AddTabSuccess::tab#add
-{
-    background-image : url(./resource/icons/start_btn.png);
-}
 
+AddTabSuccess::tab#add {
+    background-image: url(./resource/icons/start_btn.png);
+}
 
 SuccessLabel {
 
-    background-color: qlineargradient(spread: pad, x1:0.517, y1:1,
-    x2:0.506, y2:0,
-    stop:0 rgb(208, 208, 208),
-    stop:1 rgb(224, 224, 224));
+    background-color: qlineargradient(spread:pad,
+    x1: 0.517,
+    y1: 1,
+    x2: 0.506,
+    y2: 0,
+    stop: 0 rgb(208, 208, 208),
+    stop: 1 rgb(224, 224, 224));
 
     /*border-top: 1px solid #a9a9a9;*/
     /*border-right: 1px solid #a9a9a9;*/
@@ -261,7 +54,3 @@ SuccessLabel {
     /*border-left: 1px solid #a9a9a9;*/
 }
 
-QPushButton#home_btn {
-    border: none;
-    image: url(./resource/icons/home.png);
-}

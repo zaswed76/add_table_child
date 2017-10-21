@@ -11,6 +11,7 @@ from add_table import pth
 from add_table.gui import main_widget, success, tool, grade
 from add_table import game_manager, game_stat, config, app
 from add_table.games import add_table
+from add_table.lib import add_css
 
 
 def qt_message_handler(mode, context, message):
@@ -71,7 +72,9 @@ class Main(QtCore.QObject):
 
     def _init_gui(self):
         app = QtWidgets.QApplication(sys.argv)
-        app.setStyleSheet(open(pth.CSS_STYLE, "r").read())
+        style = add_css.get_style(pth.CSS_DIR)
+
+        app.setStyleSheet(style)
         self.gui = main_widget.Widget(self.app_cfg)
         self.gui.setWindowTitle(self.cfg.window_title)
 

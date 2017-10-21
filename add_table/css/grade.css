@@ -1,0 +1,89 @@
+
+GradeBtn {
+    border: none;
+    /*background-color: #39991d;*/
+}
+
+GradeBtn#step_1 {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_1:hover {
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_1:checked {
+    border-top: 1px solid #10ff21;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_2 {
+    border-top: 1px solid #a9a9a9;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_2:hover {
+    border-top: 1px solid #ffffff;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_2:checked {
+    border-top: 1px solid #10ff21;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #a9a9a9;
+}
+
+GradeBtn#step_3 {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+GradeBtn#step_3:hover {
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+GradeBtn#step_3:checked {
+    border-top: 1px solid #10ff21;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: none;
+    border-left: none;
+}
+
+GradeBtn#place_1 {
+    image: url(./resource/icons/Krosh.png);
+}
+
+GradeBtn#place_2 {
+    image: url(./resource/icons/Krosh_2.png);
+}
+
+GradeBtn#place_3 {
+    image: url(./resource/icons/Krosh_3.png);
+}
+
+
+Grade {
+    margin-bottom: 12px;
+    /*border-top: 1px solid #a9a9a9;*/
+    /*border-right: 1px solid #a9a9a9;*/
+    /*border-bottom: 1px solid #a9a9a9;*/
+    /*border-left: 1px solid #a9a9a9;*/
+}

@@ -1,0 +1,17 @@
+
+
+
+
+
+
+Widget {
+    background-color: #05B8CC;
+}
+
+
+
+
+
+QPushButton {
+    background-color: chartreuse;
+}

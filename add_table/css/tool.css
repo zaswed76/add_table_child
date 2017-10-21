@@ -1,0 +1,115 @@
+Tool {
+    background-color: #306677;
+}
+
+
+Btn#stop_btn {
+    image: url(./resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+}
+
+Btn#stop_btn:hover {
+    image: url(./resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
+Btn#start_btn {
+    image: url(./resource/icons/start_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+}
+
+Btn#start_btn:hover {
+    image: url(./resource/icons/start_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+}
+
+Btn#send_time_btn {
+    image: url(./resource/icons/sand_unchecked.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+
+}
+
+Btn#send_time_btn:checked {
+    image: url(./resource/icons/sand.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+
+}
+
+Btn#cfg_btn {
+    image: url(./resource/icons/cfg.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    min-height: 30px;
+    min-width: 30px;
+    margin-right: 20px;
+}
+
+LevelBtn {
+    border-radius: 4px;
+    border-top: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    border-left: 1px solid #e9e9e9;
+    font-family: Helvetica;
+    font-size: 12pt;
+    color: #313131;
+}
+
+LevelBtn:checked {
+
+    border-top: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 2px solid #10ff21;
+    border-left: 1px solid #e9e9e9;
+    font-family: Helvetica;
+    font-size: 12pt;
+    color: #313131;
+}
+
+LevelBtn:hover {
+    border-top: 2px solid #f6f2ff;
+    border-right: 2px solid #f6f2ff;
+    border-bottom: 2px solid #f6f2ff;
+    border-left: 2px solid #f6f2ff;
+}
+
+LevelBtn:disabled {
+    border-top: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
+    border-bottom: 1px solid #a9a9a9;
+    border-left: 1px solid #a9a9a9;
+    font-family: Helvetica;
+    font-size: 12pt;
+    color: #818181;
+}
+
+QPushButton#home_btn {
+    border: none;
+    image: url(./resource/icons/home.png);
+}
