@@ -1,5 +1,5 @@
 Tool {
-    background-color: #306677;
+    background-color: #e2e2e2;
 }
 
 
@@ -70,10 +70,10 @@ Btn#success_btn {
 
 LevelBtn {
     border-radius: 4px;
-    border-top: 1px solid #e9e9e9;
-    border-right: 1px solid #e9e9e9;
-    border-bottom: 1px solid #e9e9e9;
-    border-left: 1px solid #e9e9e9;
+    border-top: 1px solid #3cc8d9;
+    border-right: 1px solid #3cc8d9;
+    border-bottom: 1px solid #3cc8d9;
+    border-left: 1px solid #3cc8d9;
     font-family: Helvetica;
     font-size: 12pt;
     color: #313131;
@@ -81,20 +81,25 @@ LevelBtn {
 
 LevelBtn:checked {
 
-    border-top: 1px solid #e9e9e9;
-    border-right: 1px solid #e9e9e9;
+    border-top: 1px solid #3cc8d9;
+    border-right: 1px solid #3cc8d9;
     border-bottom: 2px solid #10ff21;
-    border-left: 1px solid #e9e9e9;
+    border-left: 1px solid #3cc8d9;
     font-family: Helvetica;
     font-size: 12pt;
     color: #313131;
 }
 
+
+
 LevelBtn:hover {
-    border-top: 2px solid #f6f2ff;
-    border-right: 2px solid #f6f2ff;
-    border-bottom: 2px solid #f6f2ff;
-    border-left: 2px solid #f6f2ff;
+    border-top: 1px solid #3cc8d9;
+    border-right: 1px solid #3cc8d9;
+    border-bottom: 2px solid #10ff21;
+    border-left: 1px solid #3cc8d9;
+    font-family: Helvetica;
+    font-size: 12pt;
+    color: #313131;
 }
 
 LevelBtn:disabled {

@@ -55,7 +55,7 @@ class SuccessWidget(QtWidgets.QDialog):
         box = QtWidgets.QVBoxLayout(self)
         box.setContentsMargins(0, 0, 0, 0)
         self.tab = QtWidgets.QTabWidget(self)
-        self.tab.setIconSize(QtCore.QSize(40, 40))
+        self.tab.setIconSize(QtCore.QSize(128, 64))
         box.addWidget(self.tab)
 
     def add_success(self, tab):

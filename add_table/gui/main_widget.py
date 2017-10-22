@@ -16,8 +16,9 @@ class Btn(QtWidgets.QPushButton):
         self.setIconSize(size)
 
 class LevelBtn(QtWidgets.QPushButton):
-    def __init__(self, name, size, parent):
+    def __init__(self, name, size, parent, second_name=None):
         super().__init__()
+        self.second_name = second_name
         self.name = str(name)
         self.setCheckable(True)
         self.setAutoExclusive(True)
@@ -44,7 +45,7 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.equal.setFixedSize(100, 100)
         self.form.result.setFixedSize(100, 100)
 
-    def set_finish(self):
+    def set_finish_win(self):
         self.form.setStyleSheet("color: green")
         self.form.task.setText("{}".format("win!"))
 

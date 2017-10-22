@@ -7,13 +7,18 @@ class Levels_Controls(QtWidgets.QFrame):
         super().__init__()
 
         self.game_stat = game_stat
+        self._controls = []
 
         self.box = QtWidgets.QHBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(5)
 
+    @property
+    def controls(self):
+        return self._controls
 
     def add_ctrl(self, ctrl):
+        self._controls.append(ctrl)
         self.box.addWidget(ctrl)
 
     def set_controls(self, controls: list):
@@ -21,6 +26,8 @@ class Levels_Controls(QtWidgets.QFrame):
             if c.name == self.game_stat.current_level:
                 c.setChecked(True)
             self.add_ctrl(c)
+
+
 
 
 class Tool(QtWidgets.QFrame):

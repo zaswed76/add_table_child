@@ -15,17 +15,29 @@ QLineEdit#result {
 
 GameLabel {
     background-color: #d1d1d1;
+
+}
+
+QLabel#equal {
+    color: #555555;
 }
 
 
 QProgressBar {
-    border: 1px solid grey;
+    border: 1px solid #eaeaea;
     border-radius: 5px;
     max-height: 6px;
+    background-color: #d5d5d5;
 }
 
-QProgressBar::chunk {
+QProgressBar#timer::chunk {
     background-color: #05B8CC;
+
+}
+
+
+QProgressBar#task_progress::chunk {
+    background-color: #1fcc4f;
 
 }
 

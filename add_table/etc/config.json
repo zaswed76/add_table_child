@@ -10,6 +10,13 @@
         "step_2": 30,
         "step_3": 40
     },
+
+    "grade_to_label_place": {
+        "step_1": "I место",
+        "step_2": "II место",
+        "step_3": "III место"
+    },
+
     "mix": true,
     "levels": {
         "2": true,
@@ -23,5 +30,5 @@
     },
     "current_level": "2",
     "progress_max": 10000,
-    "grade": "step_2"
+    "grade": "step_3"
 }
