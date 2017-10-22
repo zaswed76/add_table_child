@@ -9,9 +9,10 @@ class GameStat:
 
         self.levels = cfg.levels
         self.game_time = 0
+        self.place = None
 
     def __repr__(self):
-        return "stat: lev-{}, time-{}".format(self.current_level, self.game_time)
+        return "stat: lev-{}, time-{}, место-{}".format(self.current_level, self.game_time, self.place)
 
 
 

@@ -197,6 +197,7 @@ class Main(QtCore.QObject):
 
         self.current_game = self.game_manager[self.cfg.current_game]
         current_level = self.game_stat.current_level
+        game_stat.place = self.grade.current_step
 
         self.current_game.create_tasks(
             int(current_level), "add",
