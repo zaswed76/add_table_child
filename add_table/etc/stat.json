@@ -1,6 +1,12 @@
 {
     "add_table": {
-        "2": "step_1",
-        "3": "step_2"
+        "2": {
+            "step": "step_1",
+            "time": 14
+        },
+        "3": {
+            "step": "step_2",
+            "time": 17
+        }
     }
 }

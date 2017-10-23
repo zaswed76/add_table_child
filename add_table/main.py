@@ -271,17 +271,21 @@ class Main(QtCore.QObject):
 
 
         data = self.stat_cfg.data[self.add_table_game.name]
-        step = data.get(self.game_stat.current_level)
+        print(data)
+        step = data.get(self.game_stat.current_level, {}).get("step")
+        print(step)
 
         if step is not None:
             last_rang = self.cfg.data["grade_to_rang"][step]
             if current_rang < last_rang:
 
-                data[self.game_stat.current_level] = self.game_stat.place
+                data[self.game_stat.current_level]["step"] = self.game_stat.place
+                data[self.game_stat.current_level]["time"] = self.game_stat.game_time
 
         else:
 
-            data[self.game_stat.current_level] = self.game_stat.place
+                data[self.game_stat.current_level]["step"] = self.game_stat.place
+                data[self.game_stat.current_level]["time"] = self.game_stat.game_time
         self.stat_cfg.save()
 
     def start_progress(self):
