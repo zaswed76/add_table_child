@@ -277,8 +277,10 @@ class Main(QtCore.QObject):
         current_time = self.game_stat.game_time
 
         data = self.stat_cfg.data[self.add_table_game.name]
+        print(data)
 
         step = data.get(self.game_stat.current_level, {}).get("step")
+        print(step)
         last_time = data.get(self.game_stat.current_level, {}).get("time")
         if step is not None:
             last_rang = self.cfg.data["grade_to_rang"][step]
