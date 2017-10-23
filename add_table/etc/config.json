@@ -11,9 +11,9 @@
         "step_3": 40
     },
     "grade_to_label_place": {
-        "step_1": "I \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455",
-        "step_2": "II \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455",
-        "step_3": "III \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455"
+        "step_1": "I \u043c\u0435\u0441\u0442\u043e",
+        "step_2": "II \u043c\u0435\u0441\u0442\u043e",
+        "step_3": "III \u043c\u0435\u0441\u0442\u043e"
     },
     "grade_to_rang": {
         "step_1": 1,
@@ -33,5 +33,5 @@
     },
     "current_level": "2",
     "progress_max": 10000,
-    "grade": "step_1"
+    "grade": "step_3"
 }

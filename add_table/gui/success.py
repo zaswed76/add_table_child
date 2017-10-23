@@ -16,6 +16,8 @@ class TabSuccess(QtWidgets.QFrame):
         super().__init__()
         if icon is not None:
             self.icon = QtGui.QIcon(icon)
+
+        self.labels = {}
         self.setObjectName(name)
         self.game_stat = game_stat
         self.cfg = cfg
@@ -27,10 +29,8 @@ class TabSuccess(QtWidgets.QFrame):
 
 
         for name in self.game_stat.levels.keys():
-
-            lb = SuccessLabel(name)
-            self.box.addWidget(lb)
-
+            self.labels[name] = SuccessLabel(name)
+            self.box.addWidget(self.labels[name])
         rect = QtCore.QRect(0, 0, *app_cfg.size_window)
         tr = rect.topRight()
         self.home_btn = QtWidgets.QPushButton(self)
@@ -40,21 +40,33 @@ class TabSuccess(QtWidgets.QFrame):
         self.home_btn.setIconSize(size_btn)
         self.home_btn.move(x, 0)
 
+    def __repr__(self):
+        return "{}".format(self.objectName())
 
-
+    def update_success(self, stat: dict):
+        if stat is not None:
+           for name, lv in stat.items():
+               print(lv)
+               text =  "{}     {} - {} сек".format(name, lv["step"], lv["time"]).encode("1251").decode("1251")
+               self.labels[name].setText(text)
 
 class AddTabSuccess(TabSuccess):
     def __init__(self, name, app_cfg, cfg, game_stat, icon=None):
         super().__init__(name, app_cfg, cfg, game_stat, icon=None)
+        self.setObjectName(name)
 
         if icon is not None:
             self.icon = QtGui.QIcon(icon)
 
+    def __repr__(self):
+        return "{}".format(self.objectName())
+
 
 class SuccessWidget(QtWidgets.QDialog):
-    def __init__(self, cfg):
+    def __init__(self, stat_cfg):
         super().__init__()
-        self.cfg = cfg
+        self.tabs = {}
+        self.stat_cfg = stat_cfg
         box = QtWidgets.QVBoxLayout(self)
         box.setContentsMargins(0, 0, 0, 0)
         self.tab = QtWidgets.QTabWidget(self)
@@ -62,7 +74,14 @@ class SuccessWidget(QtWidgets.QDialog):
         box.addWidget(self.tab)
 
     def add_success(self, tab):
+        self.tabs[tab.objectName()] = tab
         self.tab.addTab(tab, tab.icon, "")
+
+    def update_tabs(self):
+        for name, tab in self.tabs.items():
+            tab.update_success(self.stat_cfg.data.get(name))
+
+
 
 
 if __name__ == '__main__':

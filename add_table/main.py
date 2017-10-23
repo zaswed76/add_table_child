@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -81,8 +83,8 @@ class Main(QtCore.QObject):
         self.gui = main_widget.Widget(self.app_cfg)
         self.gui.setWindowTitle(self.cfg.window_title)
 
-        self.success_widget = success.SuccessWidget(self.cfg)
-        add_success = success.TabSuccess("add", self.app_cfg,
+        self.success_widget = success.SuccessWidget(self.stat_cfg)
+        add_success = success.TabSuccess("add_table", self.app_cfg,
                                          self.cfg,
                                          self.game_stat,
                                          icon=os.path.join(pth.ICON,
@@ -222,6 +224,8 @@ class Main(QtCore.QObject):
             self.timer.start(range_timer * 1000)
 
     def open_success(self):
+
+        self.success_widget.update_tabs()
         self.gui.set_stack(self.success_widget)
 
     def tick(self):
@@ -267,25 +271,25 @@ class Main(QtCore.QObject):
 
     def save_stat(self):
 
-        current_rang = self.cfg.data["grade_to_rang"][self.grade.current_step]
 
+
+        current_rang = self.cfg.data["grade_to_rang"][self.grade.current_step]
+        current_time = self.game_stat.game_time
 
         data = self.stat_cfg.data[self.add_table_game.name]
-        print(data)
-        step = data.get(self.game_stat.current_level, {}).get("step")
-        print(step)
 
+        step = data.get(self.game_stat.current_level, {}).get("step")
+        last_time = data.get(self.game_stat.current_level, {}).get("time")
         if step is not None:
             last_rang = self.cfg.data["grade_to_rang"][step]
             if current_rang < last_rang:
-
-                data[self.game_stat.current_level]["step"] = self.game_stat.place
-                data[self.game_stat.current_level]["time"] = self.game_stat.game_time
-
+                data[self.game_stat.current_level]["step"] = self.cfg.data["grade_to_label_place"][self.game_stat.place]
+            if current_time < last_time:
+                data[self.game_stat.current_level]["time"] = current_time
         else:
-
-                data[self.game_stat.current_level]["step"] = self.game_stat.place
-                data[self.game_stat.current_level]["time"] = self.game_stat.game_time
+            data[self.game_stat.current_level] = {}
+            data[self.game_stat.current_level]["step"] = self.cfg.data["grade_to_label_place"][self.game_stat.place]
+            data[self.game_stat.current_level]["time"] = current_time
         self.stat_cfg.save()
 
     def start_progress(self):
