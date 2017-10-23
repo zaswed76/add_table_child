@@ -7,6 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 
 from add_table import game_manager, game_stat, config, app
+from add_table.lib import config_lib
 from add_table import pth
 from add_table.games import add_table
 from add_table.gui import main_widget, success, tool, grade
@@ -60,11 +61,14 @@ class Main(QtCore.QObject):
         self.text = []
         self.cfg = config.Config(pth.CONFIG)
         self.app_cfg = app.Config(pth.APPEARANCE)
+        self.stat_cfg = config_lib.Config(pth.STAT_CONFIG)
+
         self.game_stat = game_stat.GameStat(self.cfg)
         self.game_manager = game_manager.GameManager()
         self.add_table_game = add_table.AddTableGame("add_table")
 
         self.game_manager.add_game(self.add_table_game)
+
 
         self.game_process = False
         self._init_gui()
@@ -197,7 +201,7 @@ class Main(QtCore.QObject):
 
         self.current_game = self.game_manager[self.cfg.current_game]
         current_level = self.game_stat.current_level
-        game_stat.place = self.grade.current_step
+        self.game_stat.place = self.grade.current_step
 
         self.current_game.create_tasks(
             int(current_level), "add",
@@ -258,9 +262,27 @@ class Main(QtCore.QObject):
             self.stop_game()
             self.gui.tasklb.set_finish_win()
             self.game_stat.game_time = round(time.time() - self.t1)
-            print(self.game_stat)
-            print(self.grade.current_step)
+            self.save_stat()
 
+
+    def save_stat(self):
+
+        current_rang = self.cfg.data["grade_to_rang"][self.grade.current_step]
+
+
+        data = self.stat_cfg.data[self.add_table_game.name]
+        step = data.get(self.game_stat.current_level)
+
+        if step is not None:
+            last_rang = self.cfg.data["grade_to_rang"][step]
+            if current_rang < last_rang:
+
+                data[self.game_stat.current_level] = self.game_stat.place
+
+        else:
+
+            data[self.game_stat.current_level] = self.game_stat.place
+        self.stat_cfg.save()
 
     def start_progress(self):
         self.gui.progress.reset()
@@ -301,6 +323,7 @@ class Main(QtCore.QObject):
                 self.gui.tasklb.result.setText("".join(self.text))
 
     def closeEvent(self, *args, **kwargs):
+        self.cfg.progress_timer_checked = False
         self.cfg.save()
 
 

@@ -3,10 +3,12 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 
 class SuccessLabel(QtWidgets.QLabel):
-    def __init__(self, *__args):
-        super().__init__(*__args)
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
         self.setFixedHeight(33)
         self.setFixedWidth(25*12)
+        self.setText(name)
 
 
 class TabSuccess(QtWidgets.QFrame):
@@ -24,8 +26,9 @@ class TabSuccess(QtWidgets.QFrame):
         self.box.setSpacing(0)
 
 
-        for lb in range(9):
-            lb = SuccessLabel()
+        for name in self.game_stat.levels.keys():
+
+            lb = SuccessLabel(name)
             self.box.addWidget(lb)
 
         rect = QtCore.QRect(0, 0, *app_cfg.size_window)

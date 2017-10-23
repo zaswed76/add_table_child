@@ -59,6 +59,7 @@ SuccessLabel {
     y2: 0,
     stop: 0 rgb(208, 208, 208),
     stop: 1 rgb(224, 224, 224));
+    font: 18pt "Source Sans Pro";
 
     /*border-top: 1px solid #a9a9a9;*/
     /*border-right: 1px solid #a9a9a9;*/
