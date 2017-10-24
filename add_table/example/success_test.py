@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
     def update_table(self, lines):
         for row, line in enumerate(lines):
             for column, item in enumerate(line):
-                print(item[0])
+                # print(item[0])
                 self.table.setItem(row, column, QTableWidgetItem(item))
 
 
@@ -37,8 +37,11 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     import sys
     from add_table import pth
+    from add_table.lib import config_lib
 
-    stat = pth.STAT_CONFIG
+    stat_path = pth.STAT_CONFIG
+    stat_cfg = config_lib.Config(pth.STAT_CONFIG)
+    print(stat_cfg.data["add_table"])
 
     app = QApplication(sys.argv)
     mw = MainWindow()
