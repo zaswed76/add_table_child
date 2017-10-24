@@ -12,6 +12,8 @@ Btn#stop_btn {
     margin-left: 20px;
 }
 
+
+
 Btn#stop_btn:hover {
     image: url(./resource/icons/stop_btn.png);
     border-top: none;
@@ -116,3 +118,62 @@ QPushButton#home_btn {
     border: none;
     image: url(./resource/icons/home.png);
 }
+
+ QComboBox {
+     border: 1px solid gray;
+     border-radius: 3px;
+     margin-left: 20px;
+     /*padding: 1px 18px 1px 3px;*/
+     min-width: 2em;
+     font-family: Helvetica;
+     font-size: 12pt;
+     color: #313131;
+ }
+
+ QComboBox:editable {
+     background: white;
+ }
+
+ QComboBox:!editable, QComboBox::drop-down:editable {
+      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+ }
+
+ /* QComboBox получает состояние "on", когда всплывающий список раскрыт */
+ QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                 stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+ }
+
+ QComboBox:on { /* сдвиг текста, когда раскрывается всплывающий список */
+     padding-top: 3px;
+     padding-left: 4px;
+ }
+
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     /*width: 15px;*/
+
+     /*border-left-width: 1px;*/
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+     /*border-left-color: darkgray;*/
+     /*border-left-style: solid; !* только одна линия *!*/
+     /*border-top-right-radius: 3px; !* тот же радиус закругления что и у QComboBox *!*/
+     /*border-bottom-right-radius: 3px;*/
+ }
+
+ QComboBox::down-arrow {
+     image: url(./resource/icons/combo_down.png);
+ }
+
+ /*QComboBox::down-arrow:on { !* сдвиг стрелки, когда раскрывается всплывающий список *!*/
+     /*top: 1px;*/
+     /*left: 1px;*/
+ /*}*/
+

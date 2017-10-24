@@ -132,6 +132,10 @@ class Main(QtCore.QObject):
         self.send_time_btn.setChecked(False)
         self.tool.add_widget(self.send_time_btn)
 
+        self.choose_game_btn = main_widget.Combo("chgame",
+                                                 QtCore.QSize(45, 32), self)
+        self.tool.add_widget(self.choose_game_btn)
+
         ctrls_lst = [2, 3, 4, 5,
                      6, 7, 8, 9]
         _size_btn = QtCore.QSize(28, 28)
@@ -143,14 +147,14 @@ class Main(QtCore.QObject):
         # my_ctrl = main_widget.LevelBtn("M", _size_btn, self, "user")
         # self.level_ctrl.add_ctrl(my_ctrl)
 
-        self.tool.add_stretch(50)
+        self.tool.add_stretch(1)
         self.tool.add_widget(self.level_ctrl)
-        self.tool.add_stretch(50)
+        self.tool.add_stretch(1)
 
         self.grade = grade.Grade(self.cfg, size_btn)
         self.tool.add_widget(self.grade)
         self.grade.set_grade(self.cfg.grade)
-        self.tool.add_stretch(50)
+        # self.tool.add_stretch(1)
 
         # region config button
         _size = QtCore.QSize(79, 79)

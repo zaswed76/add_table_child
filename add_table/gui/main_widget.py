@@ -15,6 +15,19 @@ class Btn(QtWidgets.QPushButton):
         self.setFixedSize(size)
         self.setIconSize(size)
 
+
+class Combo(QtWidgets.QComboBox):
+    def __init__(self, name, size, parent):
+        super().__init__()
+        self.setObjectName(name)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+        self.setFixedSize(size)
+
+        self.addItem(QtGui.QIcon(os.path.join(pth.ICON, "plus.png")), "+")
+        self.addItem(QtGui.QIcon(os.path.join(pth.ICON, "minus.png")), "-")
+        self.addItem(QtGui.QIcon(os.path.join(pth.ICON, "multi.png")), "*")
+
+
 class LevelBtn(QtWidgets.QPushButton):
     def __init__(self, name, size, parent, second_name=None):
         super().__init__()
