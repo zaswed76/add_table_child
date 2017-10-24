@@ -71,7 +71,6 @@ class Main(QtCore.QObject):
 
         self.game_manager.add_game(self.add_table_game)
 
-
         self.game_process = False
         self._init_gui()
 
@@ -268,38 +267,54 @@ class Main(QtCore.QObject):
             self.game_stat.game_time = round(time.time() - self.t1)
             self.save_stat()
 
+    def _update_stat(self, stat_data, current_level,
+                     current_rang=None,
+                     current_time=None):
+        if current_rang is not None:
+            stat_data[current_level]["last_rang"] = current_rang
+        if current_time is not None:
+            stat_data[current_level]["last_time"] = current_time
 
     def save_stat(self):
-
-
-
-        current_rang = self.cfg.data["grade_to_rang"][self.grade.current_step]
         current_time = self.game_stat.game_time
+        current_rang = self.grade.current_rang
+        current_level = self.game_stat.current_level
 
-        data = self.stat_cfg.data[self.add_table_game.name]
-        print(data)
 
-        step = data.get(self.game_stat.current_level, {}).get("step")
-        print(step)
-        last_time = data.get(self.game_stat.current_level, {}).get("time")
-        if step is not None:
-            last_rang = self.cfg.data["grade_to_rang"][step]
-            if current_rang < last_rang:
-                data[self.game_stat.current_level]["step"] = self.cfg.data["grade_to_label_place"][self.game_stat.place]
-            if current_time < last_time:
-                data[self.game_stat.current_level]["time"] = current_time
-        else:
-            data[self.game_stat.current_level] = {}
-            data[self.game_stat.current_level]["step"] = self.cfg.data["grade_to_label_place"][self.game_stat.place]
-            data[self.game_stat.current_level]["time"] = current_time
-        self.stat_cfg.save()
+        stat_data = self.stat_cfg.data[self.current_game.name]
+        last_time = stat_data.get(self.game_stat.current_level,
+                                  {}).get("last_time")
+        last_rang = stat_data.get(self.game_stat.current_level,
+                                  {}).get("last_rang")
+
+
+
+        if last_rang is None:
+            stat_data[current_level] = {}
+            self._update_stat(stat_data, current_level,
+                              current_rang, current_time)
+            self.stat_cfg.save()
+        elif current_rang < last_rang and current_time < last_time:
+            self._update_stat(stat_data, current_level,
+                              current_rang, current_time)
+            self.stat_cfg.save()
+        elif current_rang < last_rang and current_time >= last_time:
+            self._update_stat(stat_data, current_level,
+                              current_rang, current_time=None)
+            self.stat_cfg.save()
+        elif current_time < last_time:
+            self._update_stat(stat_data, current_level,
+                              current_rang=None,
+                              current_time=current_time)
+            self.stat_cfg.save()
 
     def start_progress(self):
         self.gui.progress.reset()
         self.progress_timer = QTimer()
         self.gui.progress.setMaximum(self.cfg.progress_max)
         self.progress_timer.timeout.connect(self.progress_tick)
-        progress_range = self.cfg.grade_to_timer[self.grade.current_step]
+        progress_range = self.cfg.grade_to_timer[
+            self.grade.current_step]
 
         self.progress_timer.start(progress_range)
         self.grade.setDisabled(True)

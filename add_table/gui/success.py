@@ -44,22 +44,9 @@ class TabSuccess(QtWidgets.QFrame):
         return "{}".format(self.objectName())
 
     def update_success(self, stat: dict):
-        if stat is not None:
-           for name, lv in stat.items():
-               print(lv)
-               text =  "{}     {} - {} сек".format(name, lv["step"], lv["time"]).encode("1251").decode("1251")
-               self.labels[name].setText(text)
+        pass
 
-class AddTabSuccess(TabSuccess):
-    def __init__(self, name, app_cfg, cfg, game_stat, icon=None):
-        super().__init__(name, app_cfg, cfg, game_stat, icon=None)
-        self.setObjectName(name)
 
-        if icon is not None:
-            self.icon = QtGui.QIcon(icon)
-
-    def __repr__(self):
-        return "{}".format(self.objectName())
 
 
 class SuccessWidget(QtWidgets.QDialog):
