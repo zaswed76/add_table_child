@@ -47,12 +47,14 @@ class Task:
                                 self.operator.sign(), self.term)
 
 
-class AddTableGame:
+class TableGame:
+    name_to_operator = dict(minus_table = "sub", add_table = "add")
     def __init__(self, name):
         self.name = name
         self.tasks = []
         self.cursor = -1
         self._current_task = None
+        self.operator = self.name_to_operator[self.name]
 
 
     @property
@@ -105,7 +107,7 @@ class AddTableGame:
 
 if __name__ == '__main__':
     pass
-    game = AddTableGame("add_table")
+    game = TableGame("add_table")
     game.create_tasks(2, Operator.Add)
     # print(game.tasks)
     # game.tasks_mix()

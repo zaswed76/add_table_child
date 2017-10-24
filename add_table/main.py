@@ -67,9 +67,14 @@ class Main(QtCore.QObject):
 
         self.game_stat = game_stat.GameStat(self.cfg)
         self.game_manager = game_manager.GameManager()
-        self.add_table_game = add_table.AddTableGame("add_table")
+        self.add_table_game = add_table.TableGame("add_table")
 
         self.game_manager.add_game(self.add_table_game)
+
+        self.minus_table_game = add_table.TableGame("minus_table")
+        self.game_manager.add_game(self.minus_table_game)
+
+
 
         self.game_process = False
         self._init_gui()
@@ -164,7 +169,7 @@ class Main(QtCore.QObject):
         # endregion
 
 
-
+        self.choose_game_btn.currentIndexChanged.connect(self.choose_game)
         self.start_btn.clicked.connect(self.start_game)
         self.stop_btn.clicked.connect(self.stop_game)
         self.cfg_btn.clicked.connect(self.open_success)
@@ -172,6 +177,9 @@ class Main(QtCore.QObject):
             self.checked_progress_timer)
         for gc in self.level_ctrl.controls:
             gc.clicked.connect(self.choose_level)
+
+    def choose_game(self, i):
+        self.current_game = i
 
     def checked_progress_timer(self):
         self.cfg.progress_timer_checked = self.send_time_btn.isChecked()
@@ -198,18 +206,20 @@ class Main(QtCore.QObject):
         self.send_time_btn.setChecked(False)
 
     def start_game(self):
+        self.current_index_game = self.choose_game_btn.currentIndex()
         self.t1 = time.time()
         self.game_process = True
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
 
-        self.current_game = self.game_manager[self.cfg.current_game]
+        self.current_game = self.game_manager[self.current_index_game]
         current_level = self.game_stat.current_level
         self.game_stat.place = self.grade.current_step
 
+        print(self.current_game)
         self.current_game.create_tasks(
-            int(current_level), "add",
+            int(current_level), self.current_game.operator,
             mix=self.cfg.mix)
         self.current_game.run_new_game()
         self.next_step()
