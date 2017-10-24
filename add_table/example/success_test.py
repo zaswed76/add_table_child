@@ -14,33 +14,43 @@ class MainWindow(QMainWindow):
         grid_layout = QGridLayout()             # Создаём QGridLayout
         central_widget.setLayout(grid_layout)   # Устанавливаем данное размещение в центральный виджет
 
-        table = QTableWidget(self)  # Создаём таблицу
-        table.setColumnCount(3)     # Устанавливаем три колонки
-        table.setRowCount(3)        # и одну строку в таблице
+        self.table = QTableWidget(self)  # Создаём таблицу
+        self.table.setColumnCount(3)     # Устанавливаем три колонки
+        self.table.setRowCount(3)        # и одну строку в таблице
 
         # Устанавливаем заголовки таблицы
-        table.setHorizontalHeaderLabels(["Задача", "Место", "Время"])
-        table.setVerticalHeaderLabels(["", "", ""])
+        self.table.setHorizontalHeaderLabels(["Задача", "Место", "Время"])
+        self.table.setVerticalHeaderLabels(["", "", ""])
 
+        self.table.resizeColumnsToContents()
 
+        grid_layout.addWidget(self.table, 0, 0)
 
+    def update_table(self, lines):
+        for row, line in enumerate(lines):
+            for column, item in enumerate(line):
+                print(item[0])
+                self.table.setItem(row, column, QTableWidgetItem(item))
 
-
-        # заполняем первую строку
-        table.setItem(0, 0, QTableWidgetItem("2 +"))
-        table.setItem(0, 1, QTableWidgetItem("III"))
-        table.setItem(0, 2, QTableWidgetItem("25"))
-
-        # делаем ресайз колонок по содержимому
-        table.resizeColumnsToContents()
-
-        grid_layout.addWidget(table, 0, 0)   # Добавляем таблицу в сетку
 
 
 if __name__ == "__main__":
     import sys
+    from add_table import pth
+
+    stat = pth.STAT_CONFIG
 
     app = QApplication(sys.argv)
     mw = MainWindow()
+    lines = [(("2 + x"), "III", "25"),
+                 (("3 + x"), "II", "15")]
+
+    lines2 = [(("2 + x"), "I", "5"),
+                 (("3 + x"), "I", "1")]
+
+
+
+    mw.update_table(lines)
+
     mw.show()
     sys.exit(app.exec())
