@@ -217,7 +217,7 @@ class Main(QtCore.QObject):
         current_level = self.game_stat.current_level
         self.game_stat.place = self.grade.current_step
 
-        print(self.current_game)
+
         self.current_game.create_tasks(
             int(current_level), self.current_game.operator,
             mix=self.cfg.mix)
@@ -342,7 +342,7 @@ class Main(QtCore.QObject):
     def progress_tick(self):
         self.gui.progress.increase(10)
         value = self.gui.progress.value()
-        if (value == self.gui.progress.maximum() and
+        if (value >= self.gui.progress.maximum() and
                 self.game_process):
             self.stop_game()
             self.gui.tasklb.set_lose()

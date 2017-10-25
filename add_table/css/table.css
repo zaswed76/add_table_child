@@ -1,0 +1,23 @@
+
+QTableWidget {
+    font-family: Helvetica;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #08d8ff;
+}
+
+QTableWidget::item {
+    border: 1px solid gray;
+    background-color: #1c7b3d;
+}
+
+QTableWidget QHeaderView
+{
+
+
+    font-family: Helvetica;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2464cd;
+    background-color: #e1e1e1;
+}

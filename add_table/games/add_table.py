@@ -89,8 +89,8 @@ class TableGame:
 
     def create_tasks(self, level: int, operator_line: str, mix=False):
         self.tasks.clear()
-        # for t in range(1, 10):
-        for t in range(1, 2):
+        for t in range(1, 10):
+        # for t in range(1, 2):
             self.tasks.append(Task(level, t, operator_line))
         if mix:
             self.tasks_mix()

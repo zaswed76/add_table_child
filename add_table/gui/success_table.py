@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 
 
 # Наследуемся от QMainWindow
@@ -39,9 +39,10 @@ class Table(QtWidgets.QFrame):
     def update_table(self, data):
         lines = self._convert_to_lst(data)
         for row, line in enumerate(lines):
-            for column, item in enumerate(line):
-                self.table.setItem(row, column,
-                                   QtWidgets.QTableWidgetItem(item))
+            for column,ln in enumerate(line):
+                item = QtWidgets.QTableWidgetItem(ln)
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.table.setItem(row, column, item)
 
 
 if __name__ == "__main__":
