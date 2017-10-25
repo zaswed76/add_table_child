@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 
 
 # Наследуемся от QMainWindow
-class MainWindow(QtWidgets.QFrame):
+class Table(QtWidgets.QFrame):
     # Переопределяем конструктор класса
     def __init__(self):
         super().__init__()
@@ -28,10 +28,18 @@ class MainWindow(QtWidgets.QFrame):
 
         grid_layout.addWidget(self.table, 0, 0)
 
-    def update_table(self, lines):
+    def _convert_to_lst(self, data):
+        lst = []
+        for k, v in data.items():
+            level_lb = "{} + x".format(k)
+            line = [level_lb, str(v["last_rang"]), str(v["last_time"])]
+            lst.append(line)
+        return lst
+
+    def update_table(self, data):
+        lines = self._convert_to_lst(data)
         for row, line in enumerate(lines):
             for column, item in enumerate(line):
-                # print(item[0])
                 self.table.setItem(row, column,
                                    QtWidgets.QTableWidgetItem(item))
 
@@ -43,17 +51,16 @@ if __name__ == "__main__":
 
     stat_path = pth.STAT_CONFIG
     stat_cfg = config_lib.Config(pth.STAT_CONFIG)
-    print(stat_cfg.data["add_table"])
+
+
+
 
     app = QtWidgets.QApplication(sys.argv)
-    mw = MainWindow()
-    lines = [(("2 + x"), "III", "25"),
-             (("3 + x"), "II", "15")]
+    mw = Table()
+    data = stat_cfg.data["add_table"]
 
-    lines2 = [(("2 + x"), "I", "5"),
-              (("3 + x"), "I", "1")]
 
-    mw.update_table(lines)
+    mw.update_table(data)
 
     mw.show()
     sys.exit(app.exec())

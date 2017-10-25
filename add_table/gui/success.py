@@ -1,14 +1,8 @@
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
+from add_table.gui import success_table
 
 
-class SuccessLabel(QtWidgets.QLabel):
-    def __init__(self, name):
-        super().__init__()
-        self.name = name
-        self.setFixedHeight(33)
-        self.setFixedWidth(25*12)
-        self.setText(name)
 
 
 class TabSuccess(QtWidgets.QFrame):
@@ -27,10 +21,10 @@ class TabSuccess(QtWidgets.QFrame):
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(0)
 
+        self.table = success_table.Table()
+        self.box.addWidget(self.table)
 
-        for name in self.game_stat.levels.keys():
-            self.labels[name] = SuccessLabel(name)
-            self.box.addWidget(self.labels[name])
+
         rect = QtCore.QRect(0, 0, *app_cfg.size_window)
         tr = rect.topRight()
         self.home_btn = QtWidgets.QPushButton(self)
@@ -44,7 +38,8 @@ class TabSuccess(QtWidgets.QFrame):
         return "{}".format(self.objectName())
 
     def update_success(self, stat: dict):
-        pass
+        if stat is not  None:
+            self.table.update_table(stat)
 
 
 
