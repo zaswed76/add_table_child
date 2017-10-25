@@ -17,12 +17,12 @@ class Table(QtWidgets.QFrame):
 
         self.table = QtWidgets.QTableWidget(self)
         self.table.setColumnCount(3)
-        self.table.setRowCount(3)
+        self.table.setRowCount(9)
 
         # Устанавливаем заголовки таблицы
         self.table.setHorizontalHeaderLabels(
             ["Задача", "Место", "Время"])
-        self.table.setVerticalHeaderLabels(["", "", ""])
+        self.table.setVerticalHeaderLabels([""]*9)
 
         # self.table.resizeColumnsToContents()
 
