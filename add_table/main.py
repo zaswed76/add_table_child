@@ -12,7 +12,7 @@ from add_table import game_manager, game_stat, config, app
 from add_table.lib import config_lib
 from add_table import pth
 from add_table.games import add_table
-from add_table.gui import main_widget, success, tool, grade
+from add_table.gui import main_widget, success, tool, grade, root_settings
 from add_table.lib import add_css
 
 
@@ -77,7 +77,10 @@ class Main(QtCore.QObject):
 
 
         self.game_process = False
+        self.__test_mode = False
         self._init_gui()
+
+
 
     def _init_gui(self):
         app = QtWidgets.QApplication(sys.argv)
@@ -105,14 +108,17 @@ class Main(QtCore.QObject):
         self.success_widget.add_success(multi_success)
 
         self.gui.add_to_stack(self.success_widget)
-
+        self.root = root_settings.RootSettings(self.cfg)
         self.gui.keyPressEvent = self.keyPressEvent
         self.gui.closeEvent = self.closeEvent
         self._init_tool()
         self.gui.show()
         self.gui.resize(*self.app_cfg.size_window)
+        self.current_game = self.get_current_game()
 
         sys.exit(app.exec_())
+
+
 
     def show_base_window(self):
         self.gui.set_stack(self.gui.base_widget)
@@ -205,22 +211,24 @@ class Main(QtCore.QObject):
         self.gui.tasklb.clear_result()
         self.send_time_btn.setChecked(False)
 
-    def start_game(self):
+    def get_current_game(self):
         self.current_index_game = self.choose_game_btn.currentIndex()
+        return self.game_manager[self.current_index_game]
+
+    def start_game(self):
+        self.current_game = self.get_current_game()
         self.t1 = time.time()
         self.game_process = True
         self.send_time_btn.setDisabled(True)
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
-
-        self.current_game = self.game_manager[self.current_index_game]
         current_level = self.game_stat.current_level
         self.game_stat.place = self.grade.current_step
 
 
         self.current_game.create_tasks(
             int(current_level), self.current_game.operator,
-            mix=self.cfg.mix)
+            mix=self.cfg.mix, test_mode=self.__test_mode)
         self.current_game.run_new_game()
         self.next_step()
         self.start_task_progress()
@@ -278,6 +286,7 @@ class Main(QtCore.QObject):
         else:
             self.stop_game()
             self.gui.tasklb.set_finish_win()
+
             self.game_stat.game_time = round(time.time() - self.t1)
             self.save_stat()
 
@@ -295,18 +304,18 @@ class Main(QtCore.QObject):
         current_level = self.game_stat.current_level
 
 
-        stat_data = self.stat_cfg.data[self.current_game.name]
+        stat_data = self.stat_cfg.data[self.current_game.name_game]
         last_time = stat_data.get(self.game_stat.current_level,
                                   {}).get("last_time")
         last_rang = stat_data.get(self.game_stat.current_level,
                                   {}).get("last_rang")
 
-
-
         if last_rang is None:
+            if not self.cfg.progress_timer_checked:
+                current_rang = 4
             stat_data[current_level] = {}
             self._update_stat(stat_data, current_level,
-                              current_rang, current_time)
+                                  current_rang, current_time)
             self.stat_cfg.save()
         elif current_rang < last_rang and current_time < last_time:
             self._update_stat(stat_data, current_level,
@@ -322,16 +331,18 @@ class Main(QtCore.QObject):
                               current_time=current_time)
             self.stat_cfg.save()
 
-    def start_progress(self):
-        self.gui.progress.reset()
-        self.progress_timer = QTimer()
-        self.gui.progress.setMaximum(self.cfg.progress_max)
-        self.progress_timer.timeout.connect(self.progress_tick)
-        progress_range = self.cfg.grade_to_timer[
-            self.grade.current_step]
 
-        self.progress_timer.start(progress_range)
-        self.grade.setDisabled(True)
+
+    def start_progress(self):
+        if self.send_time_btn.isChecked():
+            self.gui.progress.reset()
+            self.progress_timer = QTimer()
+            self.gui.progress.setMaximum(self.cfg.progress_max)
+            self.progress_timer.timeout.connect(self.progress_tick)
+            progress_range = self.cfg.grade_to_timer[
+                self.grade.current_step]
+            self.progress_timer.start(progress_range)
+            self.grade.setDisabled(True)
 
     def start_task_progress(self):
         self.gui.task_progress.reset()
@@ -347,9 +358,30 @@ class Main(QtCore.QObject):
             self.stop_game()
             self.gui.tasklb.set_lose()
 
+    def show_root_settings(self):
+
+        self.root.form.clear_stat_btn.clicked.connect(self.clear_success)
+        self.root.form.check_test.clicked.connect(self.check_test)
+        self.root.show()
+
+    def check_test(self):
+        self.__test_mode = self.root.form.check_test.isChecked()
+
+
+
+    def clear_success(self):
+        self.stat_cfg.data[self.current_game.name_game].clear()
+        self.stat_cfg.save()
+        # self.save_stat()
+        self.success_widget.update_tabs()
+
+
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == QtCore.Qt.Key_Q and not self.game_process:
             self.start_game()
+        if (QKeyEvent.modifiers() == QtCore.Qt.ControlModifier and
+            QKeyEvent.key() == QtCore.Qt.Key_S):
+            self.show_root_settings()
         if QKeyEvent.key() == QtCore.Qt.Key_Return:
             self.accept_answer()
         elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
@@ -364,6 +396,7 @@ class Main(QtCore.QObject):
     def closeEvent(self, *args, **kwargs):
         self.cfg.progress_timer_checked = False
         self.cfg.save()
+
 
 
 if __name__ == '__main__':

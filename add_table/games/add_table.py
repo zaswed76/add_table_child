@@ -49,12 +49,12 @@ class Task:
 
 class TableGame:
     name_to_operator = dict(minus_table = "sub", add_table = "add")
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, name_game: str):
+        self.name_game = name_game
         self.tasks = []
         self.cursor = -1
         self._current_task = None
-        self.operator = self.name_to_operator[self.name]
+        self.operator = self.name_to_operator[self.name_game]
 
 
     @property
@@ -72,7 +72,7 @@ class TableGame:
 
     def __str__(self):
         return "class: {} - {}".format(self.__class__.__name__,
-                                       self.name)
+                                       self.name_game)
 
     @property
     def next_step(self):
@@ -87,10 +87,11 @@ class TableGame:
         self.cursor = -1
 
 
-    def create_tasks(self, level: int, operator_line: str, mix=False):
+    def create_tasks(self, level: int, operator_line: str, mix=False,
+                     test_mode=False):
         self.tasks.clear()
-        for t in range(1, 10):
-        # for t in range(1, 2):
+        seq = range(1, 2) if test_mode else range(1, 10)
+        for t in seq:
             self.tasks.append(Task(level, t, operator_line))
         if mix:
             self.tasks_mix()

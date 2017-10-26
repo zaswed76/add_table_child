@@ -66,6 +66,7 @@ class SuccessWidget(QtWidgets.QDialog):
 
 
 
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyleSheet(open('./etc/{0}.qss'.format('style'), "r").read())

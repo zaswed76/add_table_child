@@ -6,9 +6,9 @@
     "progress_timer_checked": false,
     "progress_timer": 10,
     "grade_to_timer": {
-        "step_1": 20,
-        "step_2": 30,
-        "step_3": 40
+        "step_1": 5,
+        "step_2": 7,
+        "step_3": 9
     },
     "grade_to_label_place": {
         "step_1": "I \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455",
