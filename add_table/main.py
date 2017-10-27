@@ -266,13 +266,14 @@ class Main(QtCore.QObject):
         if result:
             self.gui.task_progress.increase(1)
             self.gui.tasklb.result.clear()
-
             self.next_step()
 
         else:
             self.text.clear()
             self.gui.tasklb.result.clear()
             self.gui.tasklb.lose_effect()
+            self.stop_game()
+
         try:
             self.timer.start()
         except AttributeError:
@@ -372,7 +373,6 @@ class Main(QtCore.QObject):
     def clear_success(self):
         self.stat_cfg.data[self.current_game.name_game].clear()
         self.stat_cfg.save()
-        # self.save_stat()
         self.success_widget.update_tabs()
 
 

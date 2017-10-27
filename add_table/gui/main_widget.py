@@ -66,7 +66,7 @@ class TaskLabel(QtWidgets.QFrame):
 
         self.form.result.setStyleSheet("border: 6px solid red;")
         QtWidgets.qApp.processEvents()
-        QtCore.QThread.msleep(800)
+        QtCore.QThread.msleep(1000)
         self.form.result.setStyleSheet("border: none;")
 
 
