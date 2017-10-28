@@ -1,4 +1,13 @@
 {
-    "add_table": {},
+    "add_table": {
+        "3": {
+            "last_rang": 1,
+            "last_time": 31
+        },
+        "2": {
+            "last_rang": 1,
+            "last_time": 25
+        }
+    },
     "minus_table": {}
 }

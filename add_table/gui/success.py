@@ -30,7 +30,7 @@ class TabSuccess(QtWidgets.QFrame):
         self.home_btn = QtWidgets.QPushButton(self)
         self.home_btn.setObjectName("home_btn")
         size_btn = QtCore.QSize(35, 35)
-        x = tr.x() - size_btn.width()*2
+        x = tr.x() - size_btn.width()*2 -14
         self.home_btn.setIconSize(size_btn)
         self.home_btn.move(x, 0)
 
