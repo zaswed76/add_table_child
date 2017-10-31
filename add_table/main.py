@@ -75,6 +75,9 @@ class Main(QtCore.QObject):
         self.minus_table_game = add_table.TableGame("minus_table")
         self.game_manager.add_game(self.minus_table_game)
 
+        self.mul_table_game = add_table.TableGame("mul_table")
+        self.game_manager.add_game(self.mul_table_game)
+
         self.game_process = False
         self.__test_mode = False
         self._init_gui()
@@ -151,19 +154,10 @@ class Main(QtCore.QObject):
         self.level_ctrl = tool.Levels_Controls(self.game_stat)
         self.level_ctrl.set_controls(controls)
 
-        # my_ctrl = main_widget.LevelBtn("M", _size_btn, self, "user")
-        # self.level_ctrl.add_ctrl(my_ctrl)
-
         self.tool.add_stretch(1)
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(1)
 
-        # self.grade = grade.Grade(self.cfg, size_btn)
-        # self.tool.add_widget(self.grade)
-        # self.grade.set_grade(self.cfg.grade)
-        # self.tool.add_stretch(1)
-
-        # region config button
         _size = QtCore.QSize(79, 79)
         self.cfg_btn = main_widget.Btn("success_btn", _size, self)
         self.cfg_btn.setIconSize(_size)
@@ -284,17 +278,21 @@ class Main(QtCore.QObject):
             self.gui.tasklb.set_finish_win()
 
             self.game_stat.game_time = round(time.time() - self.t1)
-            self.save_stat2()
+            self.save_stat()
 
     def _update_stat(self, stat_data, current_level,
                      current_rang, current_time):
         stat_data[current_level]["last_rang"] = current_rang
         stat_data[current_level]["last_time"] = current_time
 
-    def save_stat2(self):
+    def save_stat(self):
         current_time = self.game_stat.game_time
         current_level = self.game_stat.current_level
-        stat_data = self.stat_cfg.data[self.current_game.name_game]
+        try:
+            stat_data = self.stat_cfg.data[self.current_game.name_game]
+        except KeyError:
+            self.stat_cfg.data[self.current_game.name_game] = {}
+            stat_data = self.stat_cfg.data[self.current_game.name_game]
         last_time = stat_data.get(self.game_stat.current_level,
                                   {}).get("last_time")
 
@@ -306,39 +304,6 @@ class Main(QtCore.QObject):
         elif last_time > current_time:
             self._update_stat(stat_data, current_level,
                               current_rang, current_time)
-
-
-    def save_stat(self):
-        current_time = self.game_stat.game_time
-        current_rang = self.grade.current_rang
-        current_level = self.game_stat.current_level
-
-        stat_data = self.stat_cfg.data[self.current_game.name_game]
-        last_time = stat_data.get(self.game_stat.current_level,
-                                  {}).get("last_time")
-        last_rang = stat_data.get(self.game_stat.current_level,
-                                  {}).get("last_rang")
-
-        if last_rang is None:
-            if not self.cfg.progress_timer_checked:
-                current_rang = 4
-            stat_data[current_level] = {}
-            self._update_stat(stat_data, current_level,
-                              current_rang, current_time)
-            self.stat_cfg.save()
-        elif current_rang < last_rang and current_time < last_time:
-            self._update_stat(stat_data, current_level,
-                              current_rang, current_time)
-            self.stat_cfg.save()
-        elif current_rang < last_rang and current_time >= last_time:
-            self._update_stat(stat_data, current_level,
-                              current_rang, current_time=None)
-            self.stat_cfg.save()
-        elif current_time < last_time:
-            self._update_stat(stat_data, current_level,
-                              current_rang=None,
-                              current_time=current_time)
-            self.stat_cfg.save()
 
     def start_progress(self):
         if self.send_time_btn.isChecked():

@@ -51,7 +51,7 @@ class Task:
 
 
 class TableGame:
-    name_to_operator = dict(minus_table = "sub", add_table = "add")
+    name_to_operator = dict(minus_table = "sub", add_table = "add", mul_table="mul")
     def __init__(self, name_game: str):
         self.name_game = name_game
         self.tasks = []
