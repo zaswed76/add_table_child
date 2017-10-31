@@ -54,7 +54,7 @@ class TaskLabel(QtWidgets.QFrame):
         box = QtWidgets.QHBoxLayout(self)
         box.setContentsMargins(0, 0, 0, 0)
         box.addWidget(self.form)
-        self.form.task.setFixedSize(400, 100)
+        self.form.task.setFixedSize(500, 100)
         self.form.equal.setFixedSize(100, 100)
         self.form.result.setFixedSize(100, 100)
 

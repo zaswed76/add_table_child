@@ -24,21 +24,32 @@ class Table(QtWidgets.QFrame):
             ["Задача", "Место", "Время"])
         self.table.setVerticalHeaderLabels([""]*9)
 
+
         # self.table.resizeColumnsToContents()
 
         grid_layout.addWidget(self.table, 0, 0)
 
+        header = self.table.horizontalHeader()
+        print()
+        header.sectionClicked.connect(self.click)
+
+    def click(self, r):
+        self.table.sortByColumn(r, QtCore.Qt.AscendingOrder)
+
     def _convert_to_lst(self, data):
         lst = []
-        sort_items = self.sorted(data.items())
+        sort_items = self.sorted(data.items(), 0)
         for k, v in sort_items:
             level_lb = "{} + x".format(k)
             line = [level_lb, str(v["last_rang"]), str(v["last_time"])]
             lst.append(line)
         return lst
 
-    def sorted(self, lst):
-        return sorted(lst, key=lambda x:x[0])
+    def sorted(self, lst, flag=True):
+        if flag:
+            return sorted(lst, key=lambda x:x[0])
+        else:
+            return lst
 
     def update_table(self, data):
         lines = self._convert_to_lst(data)
@@ -50,6 +61,7 @@ class Table(QtWidgets.QFrame):
                 item = QtWidgets.QTableWidgetItem(ln)
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.table.setItem(row, column, item)
+
 
 
 if __name__ == "__main__":
