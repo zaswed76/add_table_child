@@ -30,11 +30,15 @@ class Table(QtWidgets.QFrame):
 
     def _convert_to_lst(self, data):
         lst = []
-        for k, v in data.items():
+        sort_items = self.sorted(data.items())
+        for k, v in sort_items:
             level_lb = "{} + x".format(k)
             line = [level_lb, str(v["last_rang"]), str(v["last_time"])]
             lst.append(line)
         return lst
+
+    def sorted(self, lst):
+        return sorted(lst, key=lambda x:x[0])
 
     def update_table(self, data):
         lines = self._convert_to_lst(data)
