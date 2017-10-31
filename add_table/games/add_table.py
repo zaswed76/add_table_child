@@ -2,12 +2,15 @@ import operator
 import random
 
 
+
 class Operator():
     Add = "add"
     Sub = "sub"
+    Mul = "mul"
     operations = dict(
         add={"sign": "+", "meth": operator.add},
-        sub={"sign": "-", "meth": operator.sub}
+        sub={"sign": "-", "meth": operator.sub},
+        mul={"sign": "*", "meth": operator.mul}
     )
 
     def __init__(self, operator_line: str):
@@ -89,10 +92,16 @@ class TableGame:
 
     def create_tasks(self, level: int, operator_line: str, mix=False,
                      test_mode=False):
+
         self.tasks.clear()
+
         seq = range(1, 2) if test_mode else range(1, 10)
+
         for t in seq:
-            self.tasks.append(Task(level, t, operator_line))
+            if operator_line in [Operator.Add, Operator.Mul]:
+                self.tasks.append(Task(level, t, operator_line))
+            elif level >= t:
+                self.tasks.append(Task(level, t, operator_line))
         if mix:
             self.tasks_mix()
 

@@ -1,18 +1,4 @@
 {
-    "add_table": {
-        "3": {
-            "last_rang": 1,
-            "last_time": 31
-        },
-        "2": {
-            "last_rang": 1,
-            "last_time": 25
-        },
-        "4": {
-            "last_rang": 4,
-            "last_time": 64
-        }
-
-    },
+    "add_table": {},
     "minus_table": {}
 }

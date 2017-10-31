@@ -10,9 +10,18 @@ class GameStat:
         self.levels = cfg.levels
         self.game_time = 0
         self.place = None
+        print(self.cfg.grade_to_rang)
+
+    def calc_rang(self, time):
+        for k, v in self.cfg.grade_to_rang.items():
+            if time <= v:
+                return k
+        else: return ""
+
 
     def __repr__(self):
-        return "stat: lev-{}, time-{}, место-{}".format(self.current_level, self.game_time, self.place)
+        return "stat: lev-{}, time-{}, место-{}".format(
+            self.current_level, self.game_time, self.place)
 
 
 

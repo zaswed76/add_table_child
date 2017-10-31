@@ -32,11 +32,13 @@ class Table(QtWidgets.QFrame):
         header = self.table.horizontalHeader()
         print()
         header.sectionClicked.connect(self.click)
+        self.table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
     def click(self, r):
         self.table.sortByColumn(r, QtCore.Qt.AscendingOrder)
 
     def _convert_to_lst(self, data):
+        print(data)
         lst = []
         sort_items = self.sorted(data.items(), 0)
         for k, v in sort_items:
@@ -54,8 +56,6 @@ class Table(QtWidgets.QFrame):
     def update_table(self, data):
         lines = self._convert_to_lst(data)
         for row, line in enumerate(lines):
-            if int(line[1]) > 3:
-                line[1] = ""
             for column, ln in enumerate(line):
 
                 item = QtWidgets.QTableWidgetItem(ln)

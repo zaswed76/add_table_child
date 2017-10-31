@@ -138,7 +138,7 @@ class Widget(QtWidgets.QFrame):
 
 
         self.progress = Progress("timer")
-        self.game_progress.add_progress(self.progress)
+        # self.game_progress.add_progress(self.progress)
 
         self.task_progress = Progress("task_progress")
         self.game_progress.add_progress(self.task_progress)

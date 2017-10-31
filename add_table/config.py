@@ -59,4 +59,8 @@ class Config(config_lib.Config):
     def window_title(self):
         return self.data["window_title"]
 
+    @property
+    def grade_to_rang(self):
+        return self.data["grade_to_rang"]
+
 
