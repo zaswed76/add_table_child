@@ -10,7 +10,7 @@ class GameStat:
         self.levels = cfg.levels
         self.game_time = 0
         self.place = None
-        print(self.cfg.grade_to_rang)
+
 
     def calc_rang(self, time):
         for k, v in self.cfg.grade_to_rang.items():
