@@ -17,11 +17,10 @@
             "last_time": 58
         }
     },
-    "minus_table": {},
-    "mul_table": {
-        "3": {
-            "last_rang": "1",
-            "last_time": 3
-        }
+    "minus_table": {
+
+    },
+    "multi": {
+
     }
 }

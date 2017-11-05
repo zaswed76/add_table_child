@@ -30,7 +30,6 @@ class Table(QtWidgets.QFrame):
         grid_layout.addWidget(self.table, 0, 0)
 
         header = self.table.horizontalHeader()
-        print()
         header.sectionClicked.connect(self.click)
         self.table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
@@ -57,7 +56,6 @@ class Table(QtWidgets.QFrame):
         lines = self._convert_to_lst(data)
         for row, line in enumerate(lines):
             for column, ln in enumerate(line):
-
                 item = QtWidgets.QTableWidgetItem(ln)
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.table.setItem(row, column, item)
