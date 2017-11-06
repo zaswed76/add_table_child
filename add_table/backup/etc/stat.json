@@ -1,0 +1,32 @@
+{
+    "add_table": {
+        "2": {
+            "last_rang": "1",
+            "last_time": 25
+        },
+        "3": {
+            "last_rang": "1",
+            "last_time": 24
+        },
+        "5": {
+            "last_rang": "",
+            "last_time": 65
+        },
+        "4": {
+            "last_rang": "",
+            "last_time": 58
+        }
+    },
+    "minus_table": {
+        "2": {
+            "last_rang": "1",
+            "last_time": 4
+        }
+    },
+    "mul_table": {
+        "2": {
+            "last_rang": "1",
+            "last_time": 3
+        }
+    }
+}

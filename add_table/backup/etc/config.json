@@ -1,0 +1,37 @@
+{
+    "current_game": "add_table",
+    "window_title": "Mathematical Trainer",
+    "progress_title": "My progress",
+    "timer": 0,
+    "progress_timer_checked": false,
+    "progress_timer": 10,
+    "grade_to_timer": {
+        "step_1": 20,
+        "step_2": 30,
+        "step_3": 40
+    },
+    "grade_to_label_place": {
+        "step_1": "I \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455",
+        "step_2": "II \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455",
+        "step_3": "III \u0420\u0458\u0420\u00b5\u0421\u0403\u0421\u201a\u0420\u0455"
+    },
+    "mix": true,
+    "levels": {
+        "2": true,
+        "3": false,
+        "4": false,
+        "5": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": false
+    },
+    "current_level": "2",
+    "progress_max": 9999,
+    "grade": "step_1",
+    "grade_to_rang": {
+        "1": 25,
+        "2": 35,
+        "3": 45
+    }
+}

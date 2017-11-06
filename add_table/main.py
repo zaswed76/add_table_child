@@ -329,8 +329,8 @@ class Main(QtCore.QObject):
     def check_test(self):
         self.__test_mode = self.root.form.check_test.isChecked()
 
-    def clear_success(self):
-        self.stat_cfg.data[self.current_game.name_game].clear()
+    def clear_success(self, tab):
+        self.stat_cfg.data[self.current_game.name_game][tab].clear()
         self.stat_cfg.save()
         self.success_widget.update_tabs()
 
@@ -346,7 +346,8 @@ class Main(QtCore.QObject):
                     QKeyEvent.key() == QtCore.Qt.Key_D and
                     self.success_widget.isVisible()):
 
-            print(self.success_widget.current_tab.objectName())
+            name_tab = self.success_widget.current_tab.objectName()
+            self.clear_success(name_tab)
 
         if QKeyEvent.key() == QtCore.Qt.Key_Return:
             self.accept_answer()
