@@ -2,20 +2,16 @@
 
 import os
 import sys
-
 import time
+
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 
-from add_table import game_manager, game_stat, config, app
-from add_table.lib import config_lib
-from add_table import pth
+from add_table import game_manager, game_stat, config, app, pth
 from add_table.games import add_table
-from add_table.gui import main_widget, success, tool, grade, \
-    root_settings
-from add_table.lib import add_css
-
+from add_table.gui import main_widget, success, tool, root_settings
+from add_table.lib import add_css, config_lib
 
 def qt_message_handler(mode, context, message):
     if mode == QtCore.QtInfoMsg:
@@ -32,9 +28,7 @@ def qt_message_handler(mode, context, message):
         context.line, context.function, context.file))
     print('  %s: %s\n' % (mode, message))
 
-
 QtCore.qInstallMessageHandler(qt_message_handler)
-
 
 class Process(QObject):
     finished = pyqtSignal()
@@ -127,9 +121,6 @@ class Main(QtCore.QObject):
 
         sys.exit(app.exec_())
 
-    def show_base_window(self):
-        self.gui.set_stack(self.gui.base_widget)
-
     def _init_tool(self):
         width, height = self.app_cfg.size_window
         self.tool = tool.Tool(self.app_cfg)
@@ -173,10 +164,21 @@ class Main(QtCore.QObject):
             self.choose_game)
         self.start_btn.clicked.connect(self.start_game)
         self.stop_btn.clicked.connect(self.stop_game)
-        self.cfg_btn.clicked.connect(self.open_success)
+        self.cfg_btn.clicked.connect(self.show_success)
 
         for gc in self.level_ctrl.controls:
             gc.clicked.connect(self.choose_level)
+
+    def show_base_window(self):
+        self.gui.set_stack(self.gui.base_widget)
+
+    def show_success(self):
+        self.success_widget.update_tabs()
+        self.gui.set_stack(self.success_widget)
+
+    def show_root_settings(self):
+        self.root.form.check_test.clicked.connect(self.check_test)
+        self.root.show()
 
     def choose_game(self, i):
         self.current_game = i
@@ -185,25 +187,6 @@ class Main(QtCore.QObject):
         sender = self.sender()
         self.game_stat.current_level = sender.name
         self.stop_game()
-
-    def stop_game(self):
-        self.game_process = False
-
-        self.gui.tasklb.result.setDisabled(True)
-        # self.grade.setDisabled(False)
-
-        self.gui.progress.reset()
-        self.gui.task_progress.reset()
-        try:
-            self.progress_timer.stop()
-        except AttributeError:
-            pass
-        self.gui.tasklb.clear_task()
-        self.gui.tasklb.clear_result()
-
-    def get_current_game(self):
-        self.current_index_game = self.choose_game_btn.currentIndex()
-        return self.game_manager[self.current_index_game]
 
     def start_game(self):
         self.current_game = self.get_current_game()
@@ -224,44 +207,20 @@ class Main(QtCore.QObject):
         # слайд
         self.start_range_timer()
 
-    def start_range_timer(self):
-        range_timer = self.cfg.timer
-        if range_timer:
-            self.timer = QTimer()
-            self.timer.timeout.connect(self.tick)
-            self.timer.start(range_timer * 1000)
+    def stop_game(self):
+        self.game_process = False
 
-    def open_success(self):
+        self.gui.tasklb.result.setDisabled(True)
+        # self.grade.setDisabled(False)
 
-        self.success_widget.update_tabs()
-        self.gui.set_stack(self.success_widget)
-
-    def tick(self):
-        self.next_step()
-
-    def accept_answer(self):
+        self.gui.progress.reset()
+        self.gui.task_progress.reset()
         try:
-            self.timer.stop()
+            self.progress_timer.stop()
         except AttributeError:
             pass
-        answer = self.gui.tasklb.result.text()
-        if answer == "": # пустое поле
-            return
-        result = self.current_game.check_answer(answer)
-        if result:
-            self.gui.task_progress.increase(1)
-            self.gui.tasklb.result.clear()
-            self.next_step()
-        else:
-            self.text.clear()
-            self.gui.tasklb.result.clear()
-            self.gui.tasklb.lose_effect()
-            self.stop_game()
-
-        try:
-            self.timer.start()
-        except AttributeError:
-            pass
+        self.gui.tasklb.clear_task()
+        self.gui.tasklb.clear_result()
 
     def next_step(self):
         self.text.clear()
@@ -275,10 +234,64 @@ class Main(QtCore.QObject):
             self.game_stat.game_time = round(time.time() - self.t1)
             self.save_stat()
 
+    def get_current_game(self):
+        self.current_index_game = self.choose_game_btn.currentIndex()
+        return self.game_manager[self.current_index_game]
+
+    def start_range_timer(self):
+        range_timer = self.cfg.timer
+        if range_timer:
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.tick)
+            self.timer.start(range_timer * 1000)
+
+    def tick(self):
+        self.next_step()
+
+    def accept_answer(self):
+        try:
+            self.timer.stop()
+        except AttributeError:
+            pass
+        answer = self.gui.tasklb.result.text()
+        if answer == "":  # пустое поле
+            return
+        result = self.current_game.check_answer(answer)
+        if result:
+            self.gui.task_progress.increase(1)
+            self.gui.tasklb.result.clear()
+            self.next_step()
+        else:
+            self.text.clear()
+            self.gui.tasklb.result.clear()
+            self.gui.tasklb.lose_effect()
+            self.stop_game()
+        try:
+            self.timer.start()
+        except AttributeError:
+            pass
+
     def _update_stat(self, stat_data, current_level,
                      current_rang, current_time):
         stat_data[current_level]["last_rang"] = current_rang
         stat_data[current_level]["last_time"] = current_time
+
+    def start_task_progress(self):
+        self.gui.task_progress.reset()
+        self.gui.task_progress.increase(1)
+        self.gui.task_progress.setMaximum(
+            len(self.current_game.tasks))
+
+    def progress_tick(self):
+        self.gui.progress.increase(10)
+        value = self.gui.progress.value()
+        if (value >= self.gui.progress.maximum() and
+                self.game_process):
+            self.stop_game()
+            self.gui.tasklb.set_lose()
+
+    def check_test(self):
+        self.__test_mode = self.root.form.check_test.isChecked()
 
     def save_stat(self):
         current_time = self.game_stat.game_time
@@ -304,34 +317,10 @@ class Main(QtCore.QObject):
                               current_rang, current_time)
             self.stat_cfg.save()
 
-    def start_task_progress(self):
-        self.gui.task_progress.reset()
-        self.gui.task_progress.increase(1)
-        self.gui.task_progress.setMaximum(
-            len(self.current_game.tasks))
-
-    def progress_tick(self):
-        self.gui.progress.increase(10)
-        value = self.gui.progress.value()
-        if (value >= self.gui.progress.maximum() and
-                self.game_process):
-            self.stop_game()
-            self.gui.tasklb.set_lose()
-
-    def show_root_settings(self):
-        self.root.form.clear_stat_btn.clicked.connect(
-            self.clear_success)
-        self.root.form.check_test.clicked.connect(self.check_test)
-        self.root.show()
-
-    def check_test(self):
-        self.__test_mode = self.root.form.check_test.isChecked()
-
     def clear_success(self, tab=None):
         if tab is not None:
             self.stat_cfg.data[tab].clear()
             self.stat_cfg.save()
-
             self.success_widget.update_tabs()
 
     def keyPressEvent(self, QKeyEvent):
@@ -344,8 +333,7 @@ class Main(QtCore.QObject):
         if (QKeyEvent.modifiers() == (QtCore.Qt.ControlModifier |
                                           QtCore.Qt.AltModifier) and
                     QKeyEvent.key() == QtCore.Qt.Key_D and
-                    self.success_widget.isVisible()):
-
+                self.success_widget.isVisible()):
             name_tab = self.success_widget.current_tab.objectName()
             self.clear_success(name_tab)
 
