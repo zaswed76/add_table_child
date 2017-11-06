@@ -99,14 +99,14 @@ class Main(QtCore.QObject):
         add_success.home_btn.clicked.connect(self.show_base_window)
         self.success_widget.add_success(add_success)
 
-        minus_success = success.TabSuccess("minus_table", self.app_cfg,
+        minus_success = success.TabSuccess("minus_table",
+                                           self.app_cfg,
                                            self.cfg,
                                            self.game_stat,
                                            icon=os.path.join(pth.ICON,
-                                                             "minus_table.png"))
+                                                             "minus.png"))
         minus_success.home_btn.clicked.connect(self.show_base_window)
         self.success_widget.add_success(minus_success)
-
 
         multi_success = success.TabSuccess("mul_table", self.app_cfg,
                                            self.cfg,
@@ -201,7 +201,6 @@ class Main(QtCore.QObject):
         self.gui.tasklb.clear_task()
         self.gui.tasklb.clear_result()
 
-
     def get_current_game(self):
         self.current_index_game = self.choose_game_btn.currentIndex()
         return self.game_manager[self.current_index_game]
@@ -214,7 +213,6 @@ class Main(QtCore.QObject):
         self.gui.tasklb.result.setDisabled(False)
         self.gui.tasklb.set_color("#555555")
         current_level = self.game_stat.current_level
-
 
         self.current_game.create_tasks(
             int(current_level), self.current_game.operator,
@@ -288,10 +286,12 @@ class Main(QtCore.QObject):
         current_time = self.game_stat.game_time
         current_level = self.game_stat.current_level
         try:
-            stat_data = self.stat_cfg.data[self.current_game.name_game]
+            stat_data = self.stat_cfg.data[
+                self.current_game.name_game]
         except KeyError:
             self.stat_cfg.data[self.current_game.name_game] = {}
-            stat_data = self.stat_cfg.data[self.current_game.name_game]
+            stat_data = self.stat_cfg.data[
+                self.current_game.name_game]
         last_time = stat_data.get(self.game_stat.current_level,
                                   {}).get("last_time")
 
@@ -340,6 +340,14 @@ class Main(QtCore.QObject):
         if (QKeyEvent.modifiers() == QtCore.Qt.ControlModifier and
                     QKeyEvent.key() == QtCore.Qt.Key_S):
             self.show_root_settings()
+
+        if (QKeyEvent.modifiers() == (QtCore.Qt.ControlModifier |
+                                          QtCore.Qt.AltModifier) and
+                    QKeyEvent.key() == QtCore.Qt.Key_D and
+                    self.success_widget.isVisible()):
+
+            print(self.success_widget.current_tab.objectName())
+
         if QKeyEvent.key() == QtCore.Qt.Key_Return:
             self.accept_answer()
         elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
