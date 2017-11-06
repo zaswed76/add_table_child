@@ -69,9 +69,9 @@ class TableGame:
         self._current_task = task
 
     def check_answer(self, answer):
-
         if int(answer) == self.current_task.answer:
             return True
+        else: return False
 
     def __str__(self):
         return "class: {} - {}".format(self.__class__.__name__,

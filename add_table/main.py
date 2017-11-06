@@ -245,11 +245,9 @@ class Main(QtCore.QObject):
         except AttributeError:
             pass
         answer = self.gui.tasklb.result.text()
-        if answer:
-            result = self.current_game.check_answer(answer)
-        else:
-            result = False
-
+        if answer == "": # пустое поле
+            return
+        result = self.current_game.check_answer(answer)
         if result:
             self.gui.task_progress.increase(1)
             self.gui.tasklb.result.clear()

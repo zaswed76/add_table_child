@@ -54,10 +54,8 @@ class Table(QtWidgets.QFrame):
     def update_table(self, data):
         self.table.clearContents()
         lines = self._convert_to_lst(data)
-
         for row, line in enumerate(lines):
             for column, ln in enumerate(line):
-
                 item = QtWidgets.QTableWidgetItem(ln)
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.table.setItem(row, column, item)
