@@ -60,8 +60,10 @@ class SuccessWidget(QtWidgets.QDialog):
         self.tab.addTab(tab, tab.icon, "")
 
     def update_tabs(self):
+
         for name, tab in self.tabs.items():
-            tab.update_success(self.stat_cfg.data.get(name))
+            data = self.stat_cfg.data.get(name)
+            tab.update_success(data)
 
     @property
     def current_tab(self):

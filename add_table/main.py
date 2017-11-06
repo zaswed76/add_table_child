@@ -329,10 +329,12 @@ class Main(QtCore.QObject):
     def check_test(self):
         self.__test_mode = self.root.form.check_test.isChecked()
 
-    def clear_success(self, tab):
-        self.stat_cfg.data[self.current_game.name_game][tab].clear()
-        self.stat_cfg.save()
-        self.success_widget.update_tabs()
+    def clear_success(self, tab=None):
+        if tab is not None:
+            self.stat_cfg.data[tab].clear()
+            self.stat_cfg.save()
+
+            self.success_widget.update_tabs()
 
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == QtCore.Qt.Key_Q and not self.game_process:
