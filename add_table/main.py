@@ -99,7 +99,16 @@ class Main(QtCore.QObject):
         add_success.home_btn.clicked.connect(self.show_base_window)
         self.success_widget.add_success(add_success)
 
-        multi_success = success.TabSuccess("multi", self.app_cfg,
+        minus_success = success.TabSuccess("minus_table", self.app_cfg,
+                                           self.cfg,
+                                           self.game_stat,
+                                           icon=os.path.join(pth.ICON,
+                                                             "minus_table.png"))
+        minus_success.home_btn.clicked.connect(self.show_base_window)
+        self.success_widget.add_success(minus_success)
+
+
+        multi_success = success.TabSuccess("mul_table", self.app_cfg,
                                            self.cfg,
                                            self.game_stat,
                                            icon=os.path.join(pth.ICON,

@@ -18,9 +18,15 @@
         }
     },
     "minus_table": {
-
+        "2": {
+            "last_rang": "1",
+            "last_time": 4
+        }
     },
-    "multi": {
-
+    "mul_table": {
+        "2": {
+            "last_rang": "1",
+            "last_time": 3
+        }
     }
 }
