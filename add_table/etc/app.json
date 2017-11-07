@@ -1,4 +1,5 @@
 {
   "size_window": [800, 300],
-  "btn_size": [50, 50]
+  "btn_size": [50, 50],
+  "tool_height": 50
 }

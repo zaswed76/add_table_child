@@ -10,11 +10,11 @@
         },
         "5": {
             "last_rang": "",
-            "last_time": 65
+            "last_time": 50
         },
         "4": {
-            "last_rang": "",
-            "last_time": 58
+            "last_rang": "1",
+            "last_time": 25
         }
     },
     "minus_table": {},

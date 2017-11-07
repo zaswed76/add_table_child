@@ -153,7 +153,7 @@ class Main(QtCore.QObject):
         self.tool.add_widget(self.level_ctrl)
         self.tool.add_stretch(1)
 
-        _size = QtCore.QSize(79, 79)
+        _size = QtCore.QSize(55, 55)
         self.cfg_btn = main_widget.Btn("success_btn", _size, self)
         self.cfg_btn.setIconSize(_size)
         self.tool.add_widget(self.cfg_btn)

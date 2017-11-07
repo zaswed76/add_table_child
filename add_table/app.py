@@ -14,3 +14,7 @@ class Config(config_lib.Config):
     @property
     def btn_size(self):
         return self.data["btn_size"]
+
+    @property
+    def tool_height(self):
+        return self.data["tool_height"]

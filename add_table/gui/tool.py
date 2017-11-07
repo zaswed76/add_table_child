@@ -37,6 +37,7 @@ class Tool(QtWidgets.QFrame):
     def __init__(self, app_cfg):
         super().__init__()
         self.app_cfg = app_cfg
+        self.setFixedHeight(self.app_cfg.tool_height)
 
         self.box = QtWidgets.QHBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
