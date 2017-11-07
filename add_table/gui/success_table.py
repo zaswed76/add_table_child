@@ -1,19 +1,13 @@
 from PyQt5 import QtWidgets, QtCore
 
-
-# Наследуемся от QMainWindow
 class Table(QtWidgets.QFrame):
-    # Переопределяем конструктор класса
     def __init__(self):
         super().__init__()
         self.setWindowTitle(
-            "Работа с QTableWidget")  # Устанавливаем заголовок окна
-        # Устанавливаем центральный виджет
-
+            "Достижения")
         grid_layout = QtWidgets.QGridLayout(self)
         grid_layout.setContentsMargins(0, 0, 0, 0)
         grid_layout.setSpacing(0)
-
 
         self.table = QtWidgets.QTableWidget(self)
         self.table.setColumnCount(3)
