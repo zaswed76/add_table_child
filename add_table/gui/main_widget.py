@@ -46,6 +46,14 @@ class LevelBtn(QtWidgets.QPushButton):
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
 
+class Movie(QtGui.QMovie):
+    def __init__(self, *__args, **kwargs):
+        super().__init__(*__args)
+        self.setCacheMode(QtGui.QMovie.CacheAll)
+        speed =  kwargs.get("speed", False)
+        if speed:
+            self.setSpeed(speed)
+
 class TaskLabel(QtWidgets.QFrame):
     def __init__(self):
         super().__init__()
@@ -60,30 +68,17 @@ class TaskLabel(QtWidgets.QFrame):
 
     def set_finish_win(self):
         image = os.path.join(pth.ICON, "krosh.gif")
-        self.movie = QtGui.QMovie(image, QtCore.QByteArray(), self)
-        self.movie.setCacheMode(QtGui.QMovie.CacheAll)
-        self.movie.setSpeed(100)
+        self.movie = Movie(image, QtCore.QByteArray(), self)
         self.form.task.setMovie(self.movie)
         self.movie.start()
 
 
-        # self.form.setStyleSheet("color: green")
-        # self.form.task.setText("{}".format("win!"))
 
     def lose_effect(self):
         image = os.path.join(pth.ICON, "smile_lose.gif")
-        self.movie = QtGui.QMovie(image, QtCore.QByteArray(), self)
-        self.movie.setCacheMode(QtGui.QMovie.CacheAll)
-        self.movie.setSpeed(100)
+        self.movie = Movie(image, QtCore.QByteArray(), self)
         self.form.task.setMovie(self.movie)
         self.movie.start()
-        # self.form.result.setStyleSheet("border: 6px solid red;")
-        # QtWidgets.qApp.processEvents()
-        #
-        #
-        #
-        # QtCore.QThread.msleep(5000)
-        # self.form.result.setStyleSheet("border: none;")
 
 
     def set_lose(self):
