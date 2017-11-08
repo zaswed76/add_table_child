@@ -59,6 +59,7 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.result.setFixedSize(100, 100)
 
     def set_finish_win(self):
+
         self.form.setStyleSheet("color: green")
         self.form.task.setText("{}".format("win!"))
 
