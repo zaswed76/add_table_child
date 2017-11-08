@@ -265,7 +265,7 @@ class Main(QtCore.QObject):
             self.text.clear()
             self.gui.tasklb.result.clear()
             self.gui.tasklb.lose_effect()
-            self.stop_game()
+            # self.stop_game()
         try:
             self.timer.start()
         except AttributeError:

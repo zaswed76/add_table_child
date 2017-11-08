@@ -59,16 +59,31 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.result.setFixedSize(100, 100)
 
     def set_finish_win(self):
+        image = os.path.join(pth.ICON, "krosh.gif")
+        self.movie = QtGui.QMovie(image, QtCore.QByteArray(), self)
+        self.movie.setCacheMode(QtGui.QMovie.CacheAll)
+        self.movie.setSpeed(100)
+        self.form.task.setMovie(self.movie)
+        self.movie.start()
 
-        self.form.setStyleSheet("color: green")
-        self.form.task.setText("{}".format("win!"))
+
+        # self.form.setStyleSheet("color: green")
+        # self.form.task.setText("{}".format("win!"))
 
     def lose_effect(self):
-
-        self.form.result.setStyleSheet("border: 6px solid red;")
-        QtWidgets.qApp.processEvents()
-        QtCore.QThread.msleep(1000)
-        self.form.result.setStyleSheet("border: none;")
+        image = os.path.join(pth.ICON, "smile_lose.gif")
+        self.movie = QtGui.QMovie(image, QtCore.QByteArray(), self)
+        self.movie.setCacheMode(QtGui.QMovie.CacheAll)
+        self.movie.setSpeed(100)
+        self.form.task.setMovie(self.movie)
+        self.movie.start()
+        # self.form.result.setStyleSheet("border: 6px solid red;")
+        # QtWidgets.qApp.processEvents()
+        #
+        #
+        #
+        # QtCore.QThread.msleep(5000)
+        # self.form.result.setStyleSheet("border: none;")
 
 
     def set_lose(self):
