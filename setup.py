@@ -13,7 +13,7 @@ setup(
         include_package_data=True,
         long_description=open(
                 join(dirname(__file__), 'README.rst')).read(),
-        install_requires=["PyQt5"],
+        install_requires=[],
         entry_points={
             'console_scripts':
                 ['add_table = add_table.main:Main']
