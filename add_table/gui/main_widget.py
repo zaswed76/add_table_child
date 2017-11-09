@@ -8,12 +8,14 @@ from add_table.gui import tool
 
 
 class Btn(QtWidgets.QPushButton):
-    def __init__(self, name, size,  parent):
+    def __init__(self, name, size,  parent, icon=None):
         super().__init__()
         self.setObjectName(name)
         self.setCursor(QtCore.Qt.PointingHandCursor)
         self.setFixedSize(size)
         self.setIconSize(size)
+        if icon is not None:
+            self.setIcon(QtGui.QIcon(icon))
 
 
 class Combo(QtWidgets.QComboBox):

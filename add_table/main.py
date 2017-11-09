@@ -8,7 +8,8 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 
-from add_table import game_manager, game_stat, config, app, pth
+from add_table import game_manager, game_stat, config, app, \
+    pth, style
 from add_table.games import add_table
 from add_table.gui import main_widget, success, tool, root_settings
 from add_table.lib import add_css, config_lib
@@ -122,11 +123,12 @@ class Main(QtCore.QObject):
         sys.exit(app.exec_())
 
     def _init_tool(self):
-        width, height = self.app_cfg.size_window
+
         self.tool = tool.Tool(self.app_cfg)
         self.gui.set_tool(self.tool, direct=tool.Tool.Top)
         size_btn = QtCore.QSize(*self.app_cfg.btn_size)
         self.stop_btn = main_widget.Btn("stop_btn", size_btn, self)
+        self.stop_btn.setStyleSheet(style.stop_btn)
         self.tool.add_widget(self.stop_btn)
 
         # region start button
