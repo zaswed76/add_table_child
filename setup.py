@@ -1,12 +1,12 @@
 from os.path import join, dirname
 
-import club_stat
+import add_table
 from setuptools import setup, find_packages
 
 setup(
         name="add_table",
         # в __init__ пакета
-        version=club_stat.__version__,
+        version=add_table.__version__,
         packages=find_packages(
                 exclude=["*.exemple", "*.exemple.*", "exemple.*",
                          "exemple"]),
