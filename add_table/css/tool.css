@@ -5,7 +5,7 @@ Tool {
 
 Btn#stop_btn {
     image: url(:/resource/icons/stop_btn.png);
-    /*image: url(./resource/icons/combo_down.png);*/
+
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -15,17 +15,17 @@ Btn#stop_btn {
 
 
 
-/*Btn#stop_btn:hover {*/
-    /*!*image: url(./resource/icons/stop_btn.png);*!*/
-    /*border-top: none;*/
-    /*border-right: none;*/
-    /*border-bottom: none;*/
-    /*border-left: none;*/
+Btn#stop_btn:hover {
+    image: url(:/resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 
-/*}*/
+}
 
 Btn#start_btn {
-    image: url("./resource/icons/start_btn.png");
+    image: url(:/resource/icons/start_btn.png);
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -34,7 +34,7 @@ Btn#start_btn {
 }
 
 Btn#start_btn:hover {
-    image: url(./resource/icons/start_btn.png);
+    image: url(:/resource/icons/start_btn.png);
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -46,7 +46,7 @@ Btn#start_btn:hover {
 
 
 Btn#success_btn {
-    image: url('./resource/icons/success.png');
+    image: url(':/resource/icons/success.png');
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -100,7 +100,7 @@ LevelBtn:disabled {
 
 QPushButton#home_btn {
     border: none;
-    image: url(./resource/icons/home.png);
+    image: url(:/resource/icons/home.png);
 }
 
  QComboBox {
@@ -153,7 +153,7 @@ QPushButton#home_btn {
  }
 
  QComboBox::down-arrow {
-     image: url(./resource/icons/combo_down.png);
+     image: url(:/resource/icons/combo_down.png);
  }
 
  /*QComboBox::down-arrow:on { !* сдвиг стрелки, когда раскрывается всплывающий список *!*/
