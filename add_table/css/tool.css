@@ -4,7 +4,7 @@ Tool {
 
 
 Btn#stop_btn {
-    image: url(resource/icons/stop_btn.png);
+    image: url(../resource/icons/stop_btn.png);
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -24,7 +24,7 @@ Btn#stop_btn:hover {
 }
 
 Btn#start_btn {
-    image: url(./resource/icons/start_btn.png);
+    image: url("./resource/icons/start_btn.png");
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -41,28 +41,11 @@ Btn#start_btn:hover {
 
 }
 
-Btn#send_time_btn {
-    image: url(./resource/icons/sand_unchecked.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    margin-left: 20px;
 
-}
 
-Btn#send_time_btn:checked {
-    image: url(./resource/icons/sand.png);
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    margin-left: 20px;
-
-}
 
 Btn#success_btn {
-    image: url(./resource/icons/success.png);
+    image: url('./resource/icons/success.png');
     border-top: none;
     border-right: none;
     border-bottom: none;
