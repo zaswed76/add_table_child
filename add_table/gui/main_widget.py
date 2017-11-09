@@ -5,18 +5,22 @@ from PyQt5 import QtCore
 
 from add_table import pth
 from add_table.gui import tool
+from jinja2 import Template
+
 
 
 class Btn(QtWidgets.QPushButton):
-    def __init__(self, name, size,  parent, icon=None):
+    def __init__(self, name, size,  parent, style=None, icon=None):
         super().__init__()
         self.setObjectName(name)
         self.setCursor(QtCore.Qt.PointingHandCursor)
         self.setFixedSize(size)
         self.setIconSize(size)
-        if icon is not None:
-            self.setIcon(QtGui.QIcon(icon))
-
+        if style is not None:
+            template = Template(style)
+            style_sheet = template.render(path=icon)
+            print(style_sheet)
+            self.setStyleSheet(style_sheet)
 
 class Combo(QtWidgets.QComboBox):
     def __init__(self, name, size, parent):

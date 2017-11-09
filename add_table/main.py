@@ -14,6 +14,7 @@ from add_table.games import add_table
 from add_table.gui import main_widget, success, tool, root_settings
 from add_table.lib import add_css, config_lib
 
+
 def qt_message_handler(mode, context, message):
     if mode == QtCore.QtInfoMsg:
         mode = 'INFO'
@@ -29,7 +30,9 @@ def qt_message_handler(mode, context, message):
         context.line, context.function, context.file))
     print('  %s: %s\n' % (mode, message))
 
+
 QtCore.qInstallMessageHandler(qt_message_handler)
+
 
 class Process(QObject):
     finished = pyqtSignal()
@@ -127,8 +130,10 @@ class Main(QtCore.QObject):
         self.tool = tool.Tool(self.app_cfg)
         self.gui.set_tool(self.tool, direct=tool.Tool.Top)
         size_btn = QtCore.QSize(*self.app_cfg.btn_size)
+        icon = os.path.join(pth.ICON, "stop_btn.png")
+        icon = r"D:\Serg\project\add_table_child\add_table\resource\icons\stop_btn.png"
         self.stop_btn = main_widget.Btn("stop_btn", size_btn, self)
-        self.stop_btn.setStyleSheet(style.stop_btn)
+
         self.tool.add_widget(self.stop_btn)
 
         # region start button

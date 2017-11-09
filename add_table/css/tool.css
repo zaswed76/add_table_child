@@ -3,14 +3,14 @@ Tool {
 }
 
 
-/*Btn#stop_btn {*/
-    /*!*image: url(./resource/icons/stop_btn.png);*!*/
-    /*border-top: none;*/
-    /*border-right: none;*/
-    /*border-bottom: none;*/
-    /*border-left: none;*/
-    /*margin-left: 20px;*/
-/*}*/
+Btn#stop_btn {
+    image: url(././resource/icons/stop_btn.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+}
 
 
 
