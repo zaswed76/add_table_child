@@ -9,7 +9,8 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 
 from add_table import game_manager, game_stat, config, app, \
-    pth, style
+    pth, style, images_rc
+
 from add_table.games import add_table
 from add_table.gui import main_widget, success, tool, root_settings
 from add_table.lib import add_css, config_lib
