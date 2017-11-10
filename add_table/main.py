@@ -3,6 +3,7 @@
 import os
 import sys
 import time
+import subprocess
 
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
@@ -186,6 +187,7 @@ class Main(QtCore.QObject):
 
     def show_root_settings(self):
         self.root.form.check_test.clicked.connect(self.check_test)
+        self.root.form.edit_stat_config.clicked.connect(self.edit_stat_config)
         self.root.show()
 
     def choose_game(self, i):
@@ -300,6 +302,9 @@ class Main(QtCore.QObject):
 
     def check_test(self):
         self.__test_mode = self.root.form.check_test.isChecked()
+
+    def edit_stat_config(self):
+        subprocess.Popen('explorer "{}"'.format(pth.ETC))
 
     def save_stat(self):
         current_time = self.game_stat.game_time

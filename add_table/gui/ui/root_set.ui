@@ -52,7 +52,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_stat_config_2">
+          <widget class="QPushButton" name="edit_stat_config">
            <property name="maximumSize">
             <size>
              <width>200</width>
