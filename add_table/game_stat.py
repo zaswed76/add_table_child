@@ -13,6 +13,8 @@ class GameStat:
 
 
     def calc_rang(self, time):
+        print("-----------------------------")
+        print(self.cfg.grade_to_rang.items())
         for k, v in self.cfg.grade_to_rang.items():
             if time <= v:
                 return k
