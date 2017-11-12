@@ -11,13 +11,10 @@ class GameStat:
         self.game_time = 0
         self.place = None
 
-
     def calc_rang(self, time):
-        print("-----------------------------")
-        print(self.cfg.grade_to_rang.items())
-        for k, v in self.cfg.grade_to_rang.items():
-            if time <= v:
-                return k
+        for m, interval in self.cfg.grade_to_rang.items():
+            if time in range(interval[0], interval[1] + 1):
+                return m
         else: return ""
 
 

@@ -17,11 +17,6 @@
             "last_time": 25
         }
     },
-    "minus_table": {
-        "2": {
-            "last_rang": "1",
-            "last_time": 10
-        }
-    },
+    "minus_table": {},
     "mul_table": {}
 }
