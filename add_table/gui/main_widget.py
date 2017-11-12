@@ -19,7 +19,6 @@ class Btn(QtWidgets.QPushButton):
         if style is not None:
             template = Template(style)
             style_sheet = template.render(path=icon)
-            print(style_sheet)
             self.setStyleSheet(style_sheet)
 
 class Combo(QtWidgets.QComboBox):

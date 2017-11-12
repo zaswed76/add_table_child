@@ -199,6 +199,7 @@ class Main(QtCore.QObject):
         self.stop_game()
 
     def start_game(self):
+        self.stop_game()
         self.current_game = self.get_current_game()
         self.t1 = time.time()
         self.game_process = True
@@ -264,6 +265,9 @@ class Main(QtCore.QObject):
         except AttributeError:
             pass
         answer = self.gui.tasklb.result.text()
+        current_task = self.current_game.current_task
+        self.game_stat.current_task = current_task
+        self.game_stat.current_user_answer = answer
         if answer == "":  # пустое поле
             return
         result = self.current_game.check_answer(answer)
@@ -356,11 +360,19 @@ class Main(QtCore.QObject):
         elif QKeyEvent.key() == QtCore.Qt.Key_Backspace:
             self.text.clear()
             self.gui.tasklb.result.clear()
+
+        # показатьт предыдущий вопрос ответ
+        elif QKeyEvent.key() == QtCore.Qt.Key_F1:
+            answer = self.game_stat.current_user_answer
+            current_task = self.game_stat.current_task.text
+            self.gui.tasklb.task.setText(current_task)
+            self.gui.tasklb.result.setText(answer)
         elif self.gui.tasklb.task.text():
             sign = self.num_keys.get(QKeyEvent.key())
             if sign in self.num_keys.values():
                 self.text.append(sign)
                 self.gui.tasklb.result.setText("".join(self.text))
+
 
     def closeEvent(self, *args, **kwargs):
         self.cfg.progress_timer_checked = False

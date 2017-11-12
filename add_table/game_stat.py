@@ -10,7 +10,12 @@ class GameStat:
         self.levels = cfg.levels
         self.game_time = 0
         self.place = None
+        self.current_task = None
+        self.current_user_answer = None
 
+
+    def fill_tasks_list(self, task):
+        self.tasks_list.append(dict(task=task))
 
     def calc_rang(self, time, len_tasks):
         n = 0

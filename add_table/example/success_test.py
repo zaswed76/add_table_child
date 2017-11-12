@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     stat_path = pth.STAT_CONFIG
     stat_cfg = config_lib.Config(pth.STAT_CONFIG)
-    print(stat_cfg.data["add_table"])
+
 
     app = QtWidgets.QApplication(sys.argv)
     mw = MainWindow()
