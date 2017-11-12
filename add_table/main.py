@@ -214,6 +214,8 @@ class Main(QtCore.QObject):
         self.next_step()
         self.start_task_progress()
 
+        print(len(self.current_game.tasks))
+
         # слайд
         self.start_range_timer()
 
