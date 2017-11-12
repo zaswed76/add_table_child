@@ -214,8 +214,6 @@ class Main(QtCore.QObject):
         self.next_step()
         self.start_task_progress()
 
-        print(len(self.current_game.tasks))
-
         # слайд
         self.start_range_timer()
 
@@ -309,6 +307,7 @@ class Main(QtCore.QObject):
         subprocess.Popen('explorer "{}"'.format(pth.ETC))
 
     def save_stat(self):
+        len_tasks = len(self.current_game.tasks)
         current_time = self.game_stat.game_time
         current_level = self.game_stat.current_level
         try:
@@ -321,7 +320,7 @@ class Main(QtCore.QObject):
         last_time = stat_data.get(self.game_stat.current_level,
                                   {}).get("last_time")
 
-        current_rang = self.game_stat.calc_rang(current_time)
+        current_rang = self.game_stat.calc_rang(current_time, len_tasks)
         if last_time is None:
             stat_data[current_level] = {}
             self._update_stat(stat_data, current_level,

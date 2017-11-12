@@ -29,18 +29,9 @@
     "current_level": "2",
     "progress_max": 9999,
     "grade": "step_1",
-    "grade_to_rang": {
-        "1": [
-            0,
-            20
-        ],
-        "2": [
-            21,
-            30
-        ],
-        "3": [
-            31,
-            40
-        ]
-    }
+    "grade_to_rang": [
+        2.17,
+        3.3,
+        4.4
+    ]
 }

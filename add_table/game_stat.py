@@ -11,9 +11,17 @@ class GameStat:
         self.game_time = 0
         self.place = None
 
-    def calc_rang(self, time):
-        for m, interval in self.cfg.grade_to_rang.items():
-            if time in range(interval[0], interval[1] + 1):
+
+    def calc_rang(self, time, len_tasks):
+        n = 0
+        f_len_tasks = float(len_tasks)
+        for m, sec in enumerate(self.cfg.grade_to_rang, 1):
+            f_sec = float(sec)
+            start = len_tasks * n
+            end = int(round(f_len_tasks * f_sec + 1))
+            diapason = range(start, end)
+            n += 1
+            if time in diapason:
                 return m
         else: return ""
 

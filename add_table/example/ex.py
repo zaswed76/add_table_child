@@ -1,16 +1,20 @@
 
 
 
-gr = {
-    "1": [0, 20],
-    "2": [21, 30],
-    "3": [31, 40]
-}
+gr = [2.17, 3.3, 4.4]
 
-def calc_rang(time):
-    for m, interval in gr.items():
-        if time in range(interval[0], interval[1] + 1):
+def calc_rang(time, len_tasks):
+    n = 0
+    f_len_tasks = float(len_tasks)
+    for m, sec in enumerate(gr, 1):
+        f_sec = float(sec)
+        start = len_tasks * n
+        end = int(round(f_len_tasks * f_sec + 1))
+        diapason = range(start, end)
+        n += 1
+        if time in diapason:
             return m
     else: return ""
 
-print(calc_rang(21))
+print(calc_rang(4, 9))
+
