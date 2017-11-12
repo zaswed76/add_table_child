@@ -205,7 +205,8 @@ class Main(QtCore.QObject):
         self.game_process = True
 
         self.gui.tasklb.result.setDisabled(False)
-        self.gui.tasklb.set_color("#555555")
+        self.gui.tasklb.reset_effect()
+
         current_level = self.game_stat.current_level
 
         self.current_game.create_tasks(
@@ -220,10 +221,7 @@ class Main(QtCore.QObject):
 
     def stop_game(self):
         self.game_process = False
-
         self.gui.tasklb.result.setDisabled(True)
-        # self.grade.setDisabled(False)
-
         self.gui.progress.reset()
         self.gui.task_progress.reset()
         try:
@@ -279,7 +277,6 @@ class Main(QtCore.QObject):
             self.text.clear()
             self.gui.tasklb.result.clear()
             self.gui.tasklb.lose_effect()
-            # self.stop_game()
         try:
             self.timer.start()
         except AttributeError:
@@ -367,6 +364,7 @@ class Main(QtCore.QObject):
             current_task = self.game_stat.current_task.text
             self.gui.tasklb.task.setText(current_task)
             self.gui.tasklb.result.setText(answer)
+            self.gui.tasklb.set_attention_effect()
         elif self.gui.tasklb.task.text():
             sign = self.num_keys.get(QKeyEvent.key())
             if sign in self.num_keys.values():

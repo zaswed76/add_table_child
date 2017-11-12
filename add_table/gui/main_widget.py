@@ -77,7 +77,15 @@ class TaskLabel(QtWidgets.QFrame):
         self.form.task.setMovie(self.movie)
         self.movie.start()
 
+    def set_attention_effect(self):
+        self.form.task.setStyleSheet("border: 3px solid red;")
+        self.form.result.setStyleSheet("border: 3px solid red;")
 
+
+    def reset_effect(self):
+        self.form.task.setStyleSheet("border: none;")
+        self.form.result.setStyleSheet("border: none;")
+        self.set_color("#555555")
 
     def lose_effect(self):
         image = os.path.join(pth.ICON, "smile_lose.gif")
