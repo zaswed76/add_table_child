@@ -1,8 +1,16 @@
+import pathlib
 
+usr = pathlib.PurePosixPath('/usr')
+print(usr)
 
+usr_local = usr / 'local'
+print(usr_local)
 
-d = {'2': {'last_rang': '1', 'last_time': 25}, '3': {'last_rang': '1', 'last_time': 24}, '5': {'last_rang': '1', 'last_time': 22}, '4': {'last_rang': '1', 'last_time': 25}}
+usr_share = usr / pathlib.PurePosixPath('share')
+print(usr_share)
 
+root = usr / '..'
+print(root)
 
-d["2"]["count"] = 9
-print(d["2"])
+etc = root / '/etc/'
+print(etc)

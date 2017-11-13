@@ -1,38 +1,11 @@
 {
-    "add_table": {
-        "2": {
-            "last_rang": "1",
-            "last_time": 25
-        },
-        "3": {
-            "last_rang": "1",
-            "last_time": 24
-        },
-        "5": {
-            "last_rang": "1",
-            "last_time": 22
-        },
-        "4": {
-            "last_rang": "1",
-            "last_time": 25
-        }
-    },
-    "minus_table": {
-        "2": {
-            "last_rang": 1,
-            "last_time": 4,
-            "count": 2
-        },
-        "3": {
-            "last_rang": 1,
-            "last_time": 7,
-            "count": 3
-        },
-        "4": {
+    "add_table": {},
+    "minus_table": {},
+    "mul_table": {
+        "7": {
             "last_rang": 3,
-            "last_time": 16,
-            "count": 4
+            "last_time": 33,
+            "count": 9
         }
-    },
-    "mul_table": {}
+    }
 }
