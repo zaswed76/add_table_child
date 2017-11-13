@@ -294,6 +294,7 @@ class Main(QtCore.QObject):
                      current_rang, current_time):
         stat_data[current_level]["last_rang"] = current_rang
         stat_data[current_level]["last_time"] = current_time
+        stat_data[current_level]["count"] = len(self.current_game.tasks)
 
     def start_task_progress(self):
         self.gui.task_progress.reset()

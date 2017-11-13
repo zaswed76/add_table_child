@@ -15,7 +15,7 @@ class Table(QtWidgets.QFrame):
 
         # Устанавливаем заголовки таблицы
         self.table.setHorizontalHeaderLabels(
-            ["Задача", "Место", "Время", "Примеров"])
+            ["Задача", "Место", "Время", "Примеров\nрешено"])
         self.table.setVerticalHeaderLabels([""]*9)
 
 
@@ -31,11 +31,15 @@ class Table(QtWidgets.QFrame):
         self.table.sortByColumn(r, QtCore.Qt.AscendingOrder)
 
     def _convert_to_lst(self, data):
+        print(data)
         lst = []
         sort_items = self.sorted(data.items(), 0)
         for k, v in sort_items:
             level_lb = "{} + x".format(k)
-            line = [level_lb, str(v["last_rang"]), str(v["last_time"])]
+            line = [level_lb, str(v["last_rang"]),
+                    str(v["last_time"]),
+                    str(v.get("count", "none"))
+                    ]
             lst.append(line)
         return lst
 

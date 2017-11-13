@@ -1,24 +1,8 @@
 
 
 
-# gr = [2.17, 3.3, 4.4]
-#
-# def calc_rang(time, len_tasks):
-#     n = 0
-#     f_len_tasks = float(len_tasks)
-#     for m, sec in enumerate(gr, 1):
-#         f_sec = float(sec)
-#         start = len_tasks * n
-#         end = int(round(f_len_tasks * f_sec + 1))
-#         diapason = range(start, end)
-#         n += 1
-#         if time in diapason:
-#             return m
-#     else: return ""
-#
-# print(calc_rang(4, 9))
+d = {'2': {'last_rang': '1', 'last_time': 25}, '3': {'last_rang': '1', 'last_time': 24}, '5': {'last_rang': '1', 'last_time': 22}, '4': {'last_rang': '1', 'last_time': 25}}
 
 
-from math import *
-
-print(round(0.6))
+d["2"]["count"] = 9
+print(d["2"])
