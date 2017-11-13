@@ -13,7 +13,7 @@ from add_table import game_manager, game_stat, config, app, \
     pth, style, images_rc
 
 from add_table.games import add_table
-from add_table.gui import main_widget, success, tool, root_settings
+from add_table.gui import main_widget, success, tool, root_settings, media
 from add_table.lib import add_css, config_lib
 
 
@@ -89,6 +89,9 @@ class Main(QtCore.QObject):
         app.setStyleSheet(style)
         self.gui = main_widget.Widget(self.app_cfg)
         self.gui.setWindowTitle(self.cfg.window_title)
+
+        self.player = media.Player()
+        # self.player.stateChanged.connect(app.quit)
 
         self.success_widget = success.SuccessWidget(self.stat_cfg)
         add_success = success.TabSuccess("add_table", self.app_cfg,
@@ -221,6 +224,7 @@ class Main(QtCore.QObject):
 
     def stop_game(self):
         self.game_process = False
+        self.player.stop()
         self.gui.tasklb.result.setDisabled(True)
         self.gui.progress.reset()
         self.gui.task_progress.reset()
@@ -239,6 +243,8 @@ class Main(QtCore.QObject):
         else:
             self.stop_game()
             self.gui.tasklb.set_finish_win()
+            wow_mp3 = os.path.join(pth.SOUND, "wou.mp3")
+            self.player.play_from_local(wow_mp3)
 
             self.game_stat.game_time = round(time.time() - self.t1)
             self.save_stat()
@@ -276,6 +282,8 @@ class Main(QtCore.QObject):
         else:
             self.text.clear()
             self.gui.tasklb.result.clear()
+            no_mp3 = os.path.join(pth.SOUND, "no.mp3")
+            self.player.play_from_local(no_mp3)
             self.gui.tasklb.lose_effect()
         try:
             self.timer.start()
