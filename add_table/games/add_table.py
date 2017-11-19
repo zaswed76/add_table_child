@@ -95,7 +95,7 @@ class TableGame:
 
         self.tasks.clear()
 
-        seq = range(1, 2) if test_mode else range(1, 10)
+        seq = range(1, 2) if test_mode else range(1, 11)
 
         for t in seq:
             if operator_line in [Operator.Add, Operator.Mul]:
@@ -119,14 +119,6 @@ if __name__ == '__main__':
     pass
     game = TableGame("add_table")
     game.create_tasks(2, Operator.Add)
-    # print(game.tasks)
-    # game.tasks_mix()
-    for i in range(15):
-        task = game.next_step
-        if isinstance(task, Task):
-            print(task.text)
+    print(game.tasks[0].text)
+    print(game.tasks[0].answer)
 
-
-            # # print(operator.add.__format__())
-    # op = Operator(1, 2)
-    # print(op)
