@@ -19,3 +19,5 @@ gui - PyQt5
 .. note:: можно использовать pip3
 
 
+exclude add_table/etc/stat.json
+
