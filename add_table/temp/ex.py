@@ -1,16 +1,7 @@
-import pathlib
 
-usr = pathlib.PurePosixPath('/usr')
-print(usr)
 
-usr_local = usr / 'local'
-print(usr_local)
+lst = [1, 2,3]
+# lst  = lst * 2
+lst*=2
 
-usr_share = usr / pathlib.PurePosixPath('share')
-print(usr_share)
-
-root = usr / '..'
-print(root)
-
-etc = root / '/etc/'
-print(etc)
+print(lst)

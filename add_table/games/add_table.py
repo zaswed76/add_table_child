@@ -102,9 +102,15 @@ class TableGame:
                 self.tasks.append(Task(level, t, operator_line))
             elif level >= t:
                 self.tasks.append(Task(level, t, operator_line))
+        if True:
+            self.tasks_x2()
+
         if mix:
             self.tasks_mix()
 
+
+    def tasks_x2(self):
+        self.tasks*=2
 
     def tasks_mix(self):
         random.shuffle(self.tasks)
