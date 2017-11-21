@@ -91,7 +91,7 @@ class TableGame:
 
 
     def create_tasks(self, level: int, operator_line: str, mix=False,
-                     test_mode=False):
+                     test_mode=False, double=False):
 
         self.tasks.clear()
 
@@ -102,14 +102,13 @@ class TableGame:
                 self.tasks.append(Task(level, t, operator_line))
             elif level >= t:
                 self.tasks.append(Task(level, t, operator_line))
-        if True:
-            self.tasks_x2()
-
         if mix:
             self.tasks_mix()
+        if double:
+            self.tasks_double()
 
 
-    def tasks_x2(self):
+    def tasks_double(self):
         self.tasks*=2
 
     def tasks_mix(self):

@@ -214,7 +214,7 @@ class Main(QtCore.QObject):
 
         self.current_game.create_tasks(
             int(current_level), self.current_game.operator,
-            mix=self.cfg.mix, test_mode=self.__test_mode)
+            mix=self.cfg.mix, test_mode=self.__test_mode, double=True)
         self.current_game.run_new_game()
         self.next_step()
         self.start_task_progress()
