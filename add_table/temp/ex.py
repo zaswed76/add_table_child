@@ -1,7 +1,19 @@
 
 
-lst = [1, 2,3]
-# lst  = lst * 2
-lst*=2
+class A:
+    def __init__(self):
+        self.lst = []
 
-print(lst)
+    def lst_app(self, x):
+        pass
+
+class B(A):
+    def __init__(self):
+        super().__init__()
+
+    def lst_app(self, x):
+        self.lst.append(x)
+
+b = B()
+b.lst_app(3)
+print(b.lst)

@@ -8,8 +8,6 @@ class GameManager(collections.MutableMapping):
         self.games = {}
         self.games.update(dict(*args, **kwargs))
 
-
-
     def add_game(self, game):
         self.games[self.index] = game
         self.index += 1

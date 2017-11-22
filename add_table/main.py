@@ -12,7 +12,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 from add_table import game_manager, game_stat, config, app, \
     pth, style, images_rc
 
-from add_table.games import add_table
+from add_table.games import add_table_game
 from add_table.gui import main_widget, success, tool, root_settings, media
 from add_table.lib import add_css, config_lib
 
@@ -68,14 +68,14 @@ class Main(QtCore.QObject):
 
         self.game_stat = game_stat.GameStat(self.cfg)
         self.game_manager = game_manager.GameManager()
-        self.add_table_game = add_table.TableGame("add_table")
+        self.add_table_game = add_table_game.TableGame("add_table")
 
         self.game_manager.add_game(self.add_table_game)
 
-        self.minus_table_game = add_table.TableGame("minus_table")
+        self.minus_table_game = add_table_game.TableGame("minus_table")
         self.game_manager.add_game(self.minus_table_game)
 
-        self.mul_table_game = add_table.TableGame("mul_table")
+        self.mul_table_game = add_table_game.TableGame("mul_table")
         self.game_manager.add_game(self.mul_table_game)
 
         self.game_process = False
