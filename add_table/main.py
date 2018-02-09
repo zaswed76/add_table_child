@@ -151,7 +151,12 @@ class Main(QtCore.QObject):
         self.choose_game_btn = main_widget.Combo("chgame",
                                                  QtCore.QSize(45, 32),
                                                  self)
+
         self.tool.add_widget(self.choose_game_btn)
+
+        self.xtwo_btn = main_widget.Btn("xtwo_btn", size_btn, self)
+        self.xtwo_btn.setCheckable(True)
+        self.tool.add_widget(self.xtwo_btn)
 
         ctrls_lst = [2, 3, 4, 5,
                      6, 7, 8, 9]
@@ -214,7 +219,8 @@ class Main(QtCore.QObject):
 
         self.current_game.create_tasks(
             int(current_level), self.current_game.operator,
-            mix=self.cfg.mix, test_mode=self.__test_mode, double=True)
+            mix=self.cfg.mix, test_mode=self.__test_mode,
+            double=self.xtwo_btn.isChecked())
         self.current_game.run_new_game()
         self.next_step()
         self.start_task_progress()
@@ -379,7 +385,6 @@ class Main(QtCore.QObject):
             if sign in self.num_keys.values():
                 self.text.append(sign)
                 self.gui.tasklb.result.setText("".join(self.text))
-
 
     def closeEvent(self, *args, **kwargs):
         self.cfg.progress_timer_checked = False

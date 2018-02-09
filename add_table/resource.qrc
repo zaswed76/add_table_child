@@ -6,5 +6,7 @@
     <file>resource/icons/home.png</file>
     <file>resource/icons/combo_down.png</file>
     <file>resource/icons/success.png</file>
+    <file>resource/icons/xtwo.png</file>
+    <file>resource/icons/xtwo_select.png</file>
   </qresource>
 </RCC>

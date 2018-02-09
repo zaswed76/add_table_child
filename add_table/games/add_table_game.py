@@ -61,6 +61,7 @@ class TableGame:
         self.operator = self.name_to_operator[self.name_game]
 
 
+
     @property
     def current_task(self):
         return self._current_task
@@ -107,6 +108,7 @@ class TableGame:
             self.tasks_mix()
         if double:
             self.tasks_double()
+            self.tasks_mix()
 
 
     def tasks_double(self):

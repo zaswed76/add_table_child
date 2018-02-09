@@ -13,13 +13,15 @@ class Btn(QtWidgets.QPushButton):
     def __init__(self, name, size,  parent, style=None, icon=None):
         super().__init__()
         self.setObjectName(name)
+        print(self.objectName())
         self.setCursor(QtCore.Qt.PointingHandCursor)
         self.setFixedSize(size)
         self.setIconSize(size)
-        if style is not None:
-            template = Template(style)
-            style_sheet = template.render(path=icon)
-            self.setStyleSheet(style_sheet)
+        # if style is not None:
+        #     template = Template(style)
+        #     style_sheet = template.render(path=icon)
+        #     self.setStyleSheet(style_sheet)
+        #     print(style_sheet)
 
 class Combo(QtWidgets.QComboBox):
     def __init__(self, name, size, parent):

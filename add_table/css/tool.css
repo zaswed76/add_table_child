@@ -42,6 +42,25 @@ Btn#start_btn:hover {
 
 }
 
+Btn#xtwo_btn {
+    image: url(:/resource/icons/xtwo.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-left: 20px;
+}
+
+Btn#xtwo_btn:checked {
+    image: url(:/resource/icons/xtwo_select.png);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+
+
+}
+
 
 
 /*noinspection CssInvalidPseudoSelector*/

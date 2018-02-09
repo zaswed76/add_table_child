@@ -2,32 +2,10 @@
     "add_table": {
         "2": {
             "last_rang": 2,
-            "last_time": 24,
-            "count": 9
-        },
-        "3": {
-            "last_rang": 1,
-            "last_time": 21,
+            "last_time": 28,
             "count": 10
-        },
-        "5": {
-            "last_rang": 1,
-            "last_time": 33,
-            "count": 20
         }
     },
-    "minus_table": {
-        "2": {
-            "last_rang": 1,
-            "last_time": 2,
-            "count": 2
-        }
-    },
-    "mul_table": {
-        "7": {
-            "last_rang": 3,
-            "last_time": 33,
-            "count": 9
-        }
-    }
+    "minus_table": {},
+    "mul_table": {}
 }
