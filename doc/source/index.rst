@@ -10,6 +10,7 @@ Welcome to math_mind's documentation!
    :maxdepth: 2
 
    Introduction
+   Components
 
 
 
