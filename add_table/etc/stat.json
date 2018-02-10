@@ -1,11 +1,5 @@
 {
-    "add_table": {
-        "2": {
-            "last_rang": 2,
-            "last_time": 28,
-            "count": 10
-        }
-    },
+    "add_table": {},
     "minus_table": {},
     "mul_table": {}
 }
